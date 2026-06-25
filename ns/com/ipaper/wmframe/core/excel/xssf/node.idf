@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">com.ipaper.wmframe.core.excel.xssf</value>
+  <value name="is_public">false</value>
+  <value name="shared">cHVibGljIHN0YXRpYyBTdHJpbmcgZml4X25hbWUoU3RyaW5nIHN0cikgewoJc3RyID0gc3RyLnJl
+cGxhY2VBbGwoIlteQS1afGEtenwwLTl8I3xcXC18X3xcXC5dIiwgIiAiKTsJLy9yZXBsYWNlIGFu
+eSBub24tbm9ybWFsIGNoYXJhY3RlcnMgd2l0aCBzcGFjZQoJc3RyID0gc3RyLnRyaW0oKTsJCQkJ
+CQkJCQkJCS8vdHJpbSBhbGwgbGVhZGluZyBhbmQgdHJhaWxpbmcgc3BhY2VzCglzdHIgPSBzdHIu
+cmVwbGFjZUFsbCgiICsiLCAiXyIpOwkJCQkJCQkvL3JlcGxhY2UgYW55IHJlbWFpbmluZyBtdWx0
+aXBsZSBzcGFjZXMgd2l0aCBhIHNpbmdsZSBfCglyZXR1cm4gc3RyOwp9CgpwdWJsaWMgc3RhdGlj
+IGJvb2xlYW4gaXNWYWxpZEV4Y2VsRGF0ZShkb3VibGUgdmFsdWUpIHsJCS8vY2hlY2tzIGlmIGl0
+IGlzIGEgdmFsaWQgRXhjZWwgZGF0ZQoJcmV0dXJuICh2YWx1ZSA+IC1Eb3VibGUuTUlOX1ZBTFVF
+KTsKfQoKcHVibGljIHN0YXRpYyBib29sZWFuIGlzWFNTRkNlbGxEYXRlRm9ybWF0dGVkKFhTU0ZD
+ZWxsIGNlbGwpIHsJLy9kZXRlcm1pbmUgaWYgdGhlIGNlbGwgaXMgYSBkYXRlIChyYXRoZXIgdGhh
+biBqdXN0IGEgbnVtYmVyKQoJYm9vbGVhbiBiSXNEYXRlID0gZmFsc2U7CgoJZG91YmxlIGQgPSBj
+ZWxsLmdldE51bWVyaWNDZWxsVmFsdWUoKTsKCWlmICggaXNWYWxpZEV4Y2VsRGF0ZShkKSApIHsK
+CQlYU1NGQ2VsbFN0eWxlIHN0eWxlID0gY2VsbC5nZXRDZWxsU3R5bGUoKTsKCQlpbnQgaSA9IHN0
+eWxlLmdldERhdGFGb3JtYXQoKTsKCQlzd2l0Y2goaSkgewkJLy8gSW50ZXJuYWwgRGF0ZSBGb3Jt
+YXRzIGFzIGRlc2NyaWJlZCBvbiBwYWdlIDQyNyBpbiBNaWNyb3NvZnQgRXhjZWwgRGV2J3MgS2l0
+Li4uCgkJCWNhc2UgMHgwZToKCQkJY2FzZSAweDBmOgoJCQljYXNlIDB4MTA6CgkJCWNhc2UgMHgx
+MToKCQkJY2FzZSAweDEyOgoJCQljYXNlIDB4MTM6CgkJCWNhc2UgMHgxNDoKCQkJY2FzZSAweDE1
+OgoJCQljYXNlIDB4MTY6CgkJCWNhc2UgMHgyZDoKCQkJY2FzZSAweDJlOgoJCQljYXNlIDB4MmY6
+CgkJCQliSXNEYXRlID0gdHJ1ZTsKCQkJYnJlYWs7CgkJfQoJfQoJcmV0dXJuIGJJc0RhdGU7Cn0=
+</value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.io.*</value>
+    <value>java.util.*</value>
+    <value>java.math.*</value>
+    <value>java.text.*</value>
+    <value>org.apache.poi.xssf.usermodel.*</value>
+  </array>
+</Values>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">fwcore.utilp.jcertconvert</value>
+  <value name="is_public">false</value>
+  <value name="encodeutf8">true</value>
+  <value name="shared"></value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>com.entrust.toolkit.archive.PemHeader</value>
+    <value>com.entrust.toolkit.credentials.PKCS12Reader</value>
+    <value>com.wm.util.Base64</value>
+    <value>iaik.x509.CertificateFactory.*</value>
+    <value>iaik.x509.X509Certificate.*</value>
+    <value>java.io.ByteArrayInputStream</value>
+    <value>java.io.InputStream</value>
+    <value>java.io.StringReader</value>
+    <value>java.security.cert.CertificateException</value>
+    <value>java.security.cert.CertificateFactory</value>
+    <value>java.security.cert.X509Certificate</value>
+    <value>java.util.Arrays</value>
+  </array>
+</Values>

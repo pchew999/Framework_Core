@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">StringToInteger</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">SURhdGFDdXJzb3IgY3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQoNCi8vIFN0cmluZ1Rv
+SW50ZWdlciAtIGNvbnZlcnQgYSBzdHJpbmcgdG8gYSAzMiBiaXQgaW50ZWdlcg0KLy8NCi8vCQlp
+bnB1dCAoaW5wdXQscmVxKSAtIHN0cmluZyBpbnRlZ2VyDQovLwkJb3V0cHV0IChvdXRwdXQsaW50
+KSAtIGludGVnZXINClN0cmluZyBzSW5wdXQgPSBudWxsOw0KSW50ZWdlciBmT3V0cHV0ID0gbnVs
+bDsNCmlmIChjdXJzb3IuZmlyc3QoImlucHV0IikpIHNJbnB1dCA9IChTdHJpbmcpIGN1cnNvci5n
+ZXRWYWx1ZSgpOw0KaWYgKHNJbnB1dCA9PSBudWxsKSB0aHJvdyBuZXcgU2VydmljZUV4Y2VwdGlv
+bigiU3RyaW5nVG9JbnRlZ2VyOiBNaXNzaW5nIGlucHV0ICdpbnB1dCciKTsNCg0KZk91dHB1dCA9
+IEludGVnZXIudmFsdWVPZihzSW5wdXQpOw0KSURhdGFVdGlsLnB1dChjdXJzb3IsICJvdXRwdXQi
+LCBmT3V0cHV0ICk7DQpjdXJzb3IuZGVzdHJveSgpOw==</value>
+</Values>

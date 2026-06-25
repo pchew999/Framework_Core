@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="enabled">no</value>
+  <value name="system_package">no</value>
+  <value name="version">10.0</value>
+  <record name="startup_services" javaclass="com.wm.util.Values">
+    <null name="fwcore.startup:pkgStart"/>
+  </record>
+  <null name="shutdown_services"/>
+  <null name="replication_services"/>
+  <null name="requires"/>
+  <value name="listACL">Default</value>
+  <value name="webappLoad">yes</value>
+  <value name="name">Framework_Core</value>
+  <value name="build">202310270731wm10</value>
+  <value name="description">emergency change to subTVK to support * in filenames</value>
+  <value name="time">2023-10-27 07:31:34 CDT</value>
+  <value name="jvm_version">1.7.0_51</value>
+  <value name="publisher">wm01</value>
+  <value name="patch_nums"></value>
+</Values>

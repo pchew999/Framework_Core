@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">getThreadInfo</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">SURhdGFDdXJzb3IgY3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQoNCi8vIGdldFRocmVh
+ZEluZm8gLSByZXR1cm4gaW5mb3JtYXRpb24gYWJvdXQgdGhlIGN1cnJlbnQgdGhyZWFkDQovLw0K
+Ly8JCW5vIGlucHV0DQovLw0KLy8JCXRpZCAob3V0cHV0LHN0cikgLSB0aGUgY3VycmVudCB0aHJl
+YWQgaWQgKGEgc2ltcGxlIG51bWJlcikNCi8vCQl0bmFtZSAob3V0cHV0LHN0cikgLSB0aGUgY3Vy
+cmVudCBuYW1lIG9mIHRoZSB0aHJlYWQgKGEgc3RyaW5nIGNvbnRhaW5pbmcgbW9zdCBhbnkgY2hh
+cmFjdGVyKQ0KDQpsb25nIGxUaHJlYWRJZCA9IC0xOwkJCS8vb3V0cHV0DQpTdHJpbmcgc1RocmVh
+ZE5hbWUgPSAidW5rbm93biI7DQoNCmxUaHJlYWRJZCA9IFRocmVhZC5jdXJyZW50VGhyZWFkKCku
+Z2V0SWQoKTsNCnNUaHJlYWROYW1lID0gVGhyZWFkLmN1cnJlbnRUaHJlYWQoKS5nZXROYW1lKCk7
+DQoNCklEYXRhVXRpbC5wdXQoY3Vyc29yLCAidGlkIiwgTG9uZy50b1N0cmluZyhsVGhyZWFkSWQp
+KTsNCklEYXRhVXRpbC5wdXQoY3Vyc29yLCAidG5hbWUiLCBzVGhyZWFkTmFtZSk7DQoNCmN1cnNv
+ci5kZXN0cm95KCk7</value>
+</Values>

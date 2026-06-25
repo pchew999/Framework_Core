@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">fwcore.util.jprettyxml</value>
+  <value name="is_public">false</value>
+  <value name="shared">CnByaXZhdGUgc3RhdGljIFN0cmluZyByZXBlYXRTdHJpbmcoaW50IHN0YWNrKSB7CiBTdHJpbmdC
+dWlsZGVyIGluZGVudCA9IG5ldyBTdHJpbmdCdWlsZGVyKCk7CiBmb3IgKGludCBpID0gMDsgaSA8
+IHN0YWNrOyBpKyspIHsKICAgIGluZGVudC5hcHBlbmQoIiAgIik7CiB9CiByZXR1cm4gaW5kZW50
+LnRvU3RyaW5nKCk7Cn0gCgk=</value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.util.StringTokenizer</value>
+    <value>java.text.*</value>
+    <value>java.util.Date</value>
+  </array>
+</Values>

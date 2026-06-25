@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">StringToLong</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">SURhdGFDdXJzb3IgY3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQoNCi8vIFN0cmluZ1Rv
+TG9uZyAtIGNvbnZlcnQgYSBzdHJpbmcgdG8gYSA2NCBiaXQgTG9uZw0KLy8NCi8vCQlpbnB1dCAo
+aW5wdXQscmVxKSAtIHN0cmluZyBsb25nDQovLwkJb3V0cHV0IChvdXRwdXQsbG9uZykgLSBsb25n
+DQpMb25nIGZPdXRwdXQgPSBudWxsOw0KU3RyaW5nIHNJbnB1dCA9IG51bGw7DQppZiAoY3Vyc29y
+LmZpcnN0KCJpbnB1dCIpKSBzSW5wdXQgPSAoU3RyaW5nKSBjdXJzb3IuZ2V0VmFsdWUoKTsNCmlm
+IChzSW5wdXQgPT0gbnVsbCkgdGhyb3cgbmV3IFNlcnZpY2VFeGNlcHRpb24oIlN0cmluZ1RvTG9u
+ZzogTWlzc2luZyBpbnB1dCAnaW5wdXQnIik7DQoNCmZPdXRwdXQgPSBMb25nLnZhbHVlT2Yoc0lu
+cHV0KTsNCklEYXRhVXRpbC5wdXQoY3Vyc29yLCAib3V0cHV0IiwgZk91dHB1dCApOw0KY3Vyc29y
+LmRlc3Ryb3koKTs=</value>
+</Values>

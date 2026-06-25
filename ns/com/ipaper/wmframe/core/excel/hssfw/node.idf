@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">com.ipaper.wmframe.core.excel.hssfw</value>
+  <value name="is_public">false</value>
+  <value name="shared"></value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.io.File</value>
+    <value>java.io.FileOutputStream</value>
+    <value>java.io.OutputStream</value>
+    <value>org.apache.poi.hssf.usermodel.HSSFWorkbook</value>
+    <value>org.apache.poi.ss.usermodel.Cell</value>
+    <value>org.apache.poi.ss.usermodel.CreationHelper</value>
+    <value>org.apache.poi.ss.usermodel.Row</value>
+    <value>org.apache.poi.ss.usermodel.Sheet</value>
+    <value>org.apache.poi.ss.usermodel.Workbook</value>
+  </array>
+</Values>

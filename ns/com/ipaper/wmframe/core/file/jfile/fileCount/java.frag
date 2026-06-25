@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">fileCount</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">SURhdGFDdXJzb3IgY3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQoNCi8vIGZpbGVDb3Vu
+dCAtIGdldCBhIGNvdW50IG9mIHRoZSBmaWxlcyBhbmQgc3ViZGlyZWN0b3JpZXMgaW4gYSBmb2xk
+ZXINCi8vDQovLwlkaXJlY3RvcnkgKGlucHV0LHJlcSkgLSBmdWxseS1xdWFsaWZpZWQgZGlyZWN0
+b3J5DQovLwludW1GaWxlcyAob3V0cHV0LHN0cikgLSB0aGUgbnVtYmVyIG9mIGZpbGVzIEFORCBm
+b2xkZXJzIHRoYXQgYXJlIGZvdW5kDQoNClN0cmluZyBzRGlyZWN0b3J5ID0gbnVsbDsNCmlmIChj
+dXJzb3IuZmlyc3QoImRpcmVjdG9yeSIpKSBzRGlyZWN0b3J5ID0gKFN0cmluZykgY3Vyc29yLmdl
+dFZhbHVlKCk7DQppZiAoc0RpcmVjdG9yeSA9PSBudWxsKSB0aHJvdyBuZXcgU2VydmljZUV4Y2Vw
+dGlvbigiZmlsZUNvdW50OiBNaXNzaW5nIGlucHV0ICdkaXJlY3RvcnknIik7DQoNCmludCBjb3Vu
+dCA9IG5ldyBGaWxlKHNEaXJlY3RvcnkpLmxpc3QoKS5sZW5ndGg7DQpJRGF0YVV0aWwucHV0KGN1
+cnNvciwgIm51bUZpbGVzIiwgIiIgKyBjb3VudCk7DQoNCmN1cnNvci5kZXN0cm95KCk7CQk=</value>
+</Values>

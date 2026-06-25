@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">fwcore.util.jzipfiles</value>
+  <value name="is_public">false</value>
+  <value name="shared">ICBwcml2YXRlIHN0YXRpYyBjbGFzcyBNeVdpbGRDYXJkRmlsdGVyIGltcGxlbWVudHMgRmlsZW5h
+bWVGaWx0ZXJ7CiAgcHJpdmF0ZSBTdHJpbmcgc1JlZ0V4OwogIHByaXZhdGUgUGF0dGVybiB6UGF0
+dGVybjsKCiAgcHVibGljIE15V2lsZENhcmRGaWx0ZXIoU3RyaW5nIGlzV2lsZGNhcmQpIHsgIC8v
+IGFjY2VwdCAqIG9yID8gYXMgYSB3aWxkY2FyZCBjaGFyYWN0ZXIgaW4gdGhlIGZpbGVuYW1lCglz
+UmVnRXggPSBpc1dpbGRjYXJkLnJlcGxhY2UoIl4iLCAiXFxeIik7CS8vIGZpcnN0LCByZXBsYWNl
+IGFueSBeIGNhcmF0cyB3aXRoIGEgXF4gd2hlcmUgdGhlIFwgbmVlZHMgdG8gYmUgZXNjYXBlZAoJ
+c1JlZ0V4ID0gaXNXaWxkY2FyZC5yZXBsYWNlKCIuIiwgIlxcLiIpOwkvLyB0aGVuLCByZXBsYWNl
+IGFueSAuIHBlcmlvZHMgd2l0aCBhIFwuIHdoZXJlIHRoZSBcIG5lZWRzIHRvIGJlIGVzY2FwZWQK
+CXNSZWdFeCA9IGlzV2lsZGNhcmQucmVwbGFjZSgiJCIsICJcXCQiKTsJLy8gdGhlbiwgcmVwbGFj
+ZSBhbnkgJCBkb2xsYXIgc2lnbnMgd2l0aCBhIFwkIHdoZXJlIHRoZSBcIG5lZWRzIHRvIGJlIGVz
+Y2FwZWQKCXNSZWdFeCA9IHNSZWdFeC5yZXBsYWNlKCIqIiwgIi4qIik7CQkJLy8gdGhlbiwgcmVw
+bGFjZSBhbnkgKiBhc3Rlcmlza3Mgd2l0aCB0aGUgcmVndWxhciBleHByZXNzaW9uIC4qCglzUmVn
+RXggPSBzUmVnRXgucmVwbGFjZSgiPyIsICAiLiIpOwkJCS8vIHRoZW4sIHJlcGxhY2UgYW55ID8g
+cXVlc3Rpb24gbWFya3Mgd2l0aCB0aGUgcmVndWxhciBleHByZXNzaW9uIC4KCXNSZWdFeCA9ICJe
+IiArIHNSZWdFeCArICIkIjsJCQkJLy8gdGhlbiBzdXJyb3VuZCB0aGUgcmVzdWx0IHdpdGggc3Rh
+cnQtb2Ytc3RyaW5nIGFuZCBlbmQtb2Ytc3RyaW5nIGNoYXJhY3RlcnMKCXNSZWdFeCA9IHNSZWdF
+eC50b0xvd2VyQ2FzZSgpOwkJCQkvLyBsb3dlcmNhc2UgdGhlIHdob2xlIHRoaW5nCiAgICB6UGF0
+dGVybiA9IFBhdHRlcm4uY29tcGlsZShzUmVnRXgpOwogIH0KCiAgcHVibGljIGJvb2xlYW4gYWNj
+ZXB0KEZpbGUgZGlyLCBTdHJpbmcgc0ZpbGVuYW1lKXsKICAgIHJldHVybiB6UGF0dGVybi5tYXRj
+aGVyKHNGaWxlbmFtZS50b0xvd2VyQ2FzZSgpKS5maW5kKCk7CiAgfQp9Cgk=</value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.io.*</value>
+    <value>java.lang.SecurityException</value>
+    <value>java.util.Properties</value>
+    <value>com.wm.lang.ns.*</value>
+    <value>com.wm.app.b2b.server.*</value>
+    <value>java.io.FilenameFilter</value>
+    <value>java.util.regex.Pattern</value>
+    <value>java.util.zip.*</value>
+  </array>
+</Values>

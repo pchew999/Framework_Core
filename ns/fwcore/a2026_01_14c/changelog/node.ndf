@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="svc_type">flow</value>
+  <value name="svc_subtype">default</value>
+  <value name="svc_sigtype">java 3.5</value>
+  <record name="svc_sig" javaclass="com.wm.util.Values">
+    <record name="sig_in" javaclass="com.wm.util.Values">
+      <value name="node_type">record</value>
+      <value name="node_subtype">unknown</value>
+      <value name="is_public">false</value>
+      <value name="field_type">record</value>
+      <value name="field_dim">0</value>
+      <value name="wrapper_type">IData</value>
+      <value name="nillable">true</value>
+      <value name="form_qualified">false</value>
+      <value name="is_global">false</value>
+      <array name="rec_fields" type="record" depth="1">
+      </array>
+      <value name="modifiable">true</value>
+    </record>
+    <record name="sig_out" javaclass="com.wm.util.Values">
+      <value name="node_type">record</value>
+      <value name="node_subtype">unknown</value>
+      <value name="is_public">false</value>
+      <value name="field_type">record</value>
+      <value name="field_dim">0</value>
+      <value name="wrapper_type">IData</value>
+      <value name="nillable">true</value>
+      <value name="form_qualified">false</value>
+      <value name="is_global">false</value>
+      <array name="rec_fields" type="record" depth="1">
+      </array>
+      <value name="modifiable">true</value>
+    </record>
+  </record>
+  <value name="node_comment">
+Core Change Log
+
+	6/27/18  (CR)	modified idCacheManager to run as a scheduled job; to use global variable for settings; to validate the settings and adjust them if necessary; to use a new cache folder
+					modified pkgstart as well as sanityCheck to make sure the global variables csutilBaseFolder and systemInfo are defined and that /csutil/framework exists
+					modified allocateTransactionid to reference the new cache folder structure
+					modified event:log and event:autoLog to use UTC time
+	6/28/18 (CR)	improved trace logging when an error occurs
+	7/3/18 (CR)		added support for sftp using the jscape library (sftp.jar located in the code/jars folder of this package)
+	7/5/18 (CR)		added support for USE_SECURE in docAliasSettings for FTPGT/FTPPUT
+					removed support for USE_JSSE for HTTPGT/HTTPPUT since it is irrelevant (we will always set USE_JSSE=true since that is where TLS 1.2 support comes from)
+	7/9/18 (CR)		modified the queries slightly on the getAliasSettings/Trace services and added support for accessed dates
+	7/13/18 (CR)	changed USE_SECURE to TYPE_ACTPSVSEC (active/passive/secure) since these 3 modes are mutually exclusive
+	7/18/13 (CR)	renamed the service idAllocator and added a check in sanityCheck to make sure it was scheduled and not suspended
+	7/30/18 (CR)	added uxlrLookupSimple
+	8/2/18 (CR)		started support for accessed dates for TFW_TP_SETTINGS and TFW_TRADINGRELATIONSHIP
+					dropping support for accessed dates for TFW_APP_PICKLIST and TFW_BUSINESS_PICKLIST because of their association with TP_ALIAS/WORKFLOW
+	8/14/18 (CR)	modified extractFxPayload to support additional DataType's, either with or without base64 decoding
+	8/23/18 (CR)	modified TRANSACTION_START_DATE to be TRANSACTION_START_UTC (affected a number of services)
+					also eliminated FILE_ASCBIN from TFW_TP_SETTINGS and TFW_RFTS_STEP (also affecting a number of services)
+	8/28/18 (CR)	added mockHTTPserver and mockFTPserver to the misc folder for setting up trading partner connections in DEV that use HTTP/FTP (such as for LiaisonDXP)
+					modified TFW_TP_SETTINGS to include SETTING_TYPE as part of the key, as well as getAliasSettings to utilize it
+					added service date/jadd/addSeconds
+	8/31/18 (CR)	modified getWorkflowStepsByIID to optionally support getting the workflow steps for just the current environment
+					modified compleWorkflowStepsByIID to call the above for just the current environment, to reduce the size of the compiled workflow
+					modified addFxEnvelope to let the caller override the from message id (defaults to the transaction id)
+	9/7/18 (CR)		moved ATTR_ queries from TFW_DISCERN to TFW_WORKFLOW so that they are available for Get* workflows (not just Accept*) workflows (see transactionStart)
+	9/12/18 (CR)	modified ExecWorkflow_s to clean up the pipeline a little more prior to invoking the required service
+					added pingWithFail service, since this will be commonly needed
+	9/13/18 (CR)	modified the logs, content and pipelines to go to separate folders based on the first 6 characters of the transaction id
+	9/17/18 (CR)	modified transactionStart, updateActiveWorkflow and updateActiveDocAttributes to shuffle around more appropriately which fields are updated by the 2 services 
+					added leading zeros to the SEC_IDLE metric in TFW_TRANS_ACTIVE
+	9/18/18 (CR)	modified transactionCreate to clean up the pipeline and change empty known values from $blank to ""
+	9/19/18 (CR)	added zip services
+	9/25/18 (CR)	modified sanityCheck to record debugLog message of why it failed
+	11/13/18 (CR)	added validateFwTrigger to the startup to check that the framework envelope trigger is configured properly
+	11/30/18 (CR)	added refreshAllInstanceConfiguration service to the startup folder
+	12/3/18 (CR)	modified getInstanceProperties to support the new IsDistributed field in systemInfo, as well as all the services that call this service
+	12/13/18 (CR)	modified the refreshAllInstanceConfiguration service to support the cross-over global variable as well as the fwMapGroup* global variables
+					note that this service is also the only startup service that actually connects to the framework database
+	12/17/18 (CR)	improved startup service pkgStart with actual failure logic, plus added refreshAllInstanceConfiguration
+	12/20/18 (CR)	modified refreshAllInstanceConfiguration to support a list of map groups in MAP_GROUP_LIST
+	12/22/18 (CR)	moved the pub folder into the core package since it will be modified too frequently and the core package is easier to deploy
+					also moved the two trigger services from the static/triggers folder into the pub folder
+					also fixed a minor issue with the startup service validateFwTrigger to exit with FAILURE on two of the checks
+	1/3/19 (CR)		modified publishFwEnvelope and fwEnvelopeService to produce errors when the crossover call fails
+	1/7/19 (CR)		disabled the use of the tmcompat services, largely because TM will not be installed under a UM backbone and it would be too much work for too little benefit to
+					do cross-servicing to the broker backbone - also eliminated 7 obsolete services (moved to the other4 folder)
+	1/9/19 (CR)		corrected mapping in the schedule/ExecWorkflow_s service; also removed an obsolete reference to FILE_ASCBIN in getAliasSettingsTrace
+	1/11/19 (CR)	changed the error message in both getAliasSettings/Trace services to reflect the possibility of the settings not being found
+					cleaned up the processLastError and traceLastError services and had them call a new createUSDticket service, not yet developed - also expanded the email distribution list
+	1/14/19 (CR)	modified allocateTransactionid to NOT attempt its own allocation of a sequence number from Oracle if the cache is empty - instead fail
+	1/15/19 (CR)	modified executeWorkflow to account for the new mapping groups under the INVOKEON logic when checking if we are running on the correct cluster
+	1/18/19 (CR)	modified buildLeaderFromContent1 to search for &lt;html in the first 100 characters of the document rather than just the first 10
+					modified gvSet to truncate the global variable value to 255 characters, since that is the limit
+	1/22/19 (CR)	modified publishFwEnvelope to eliminate the use of the fwBrokerClusterList and fwDistClusterList global variables, due to their excessive size
+					modified refreshAllInstanceConfiguration to not create the above two global variables
+					modified fwTransactionResume to accept an optional STEP from a picklist (usually to back a transaction up to the map step if it fails in delivery)
+	1/23/19 (CR)	added new service refreshEntireWorkflowSchedule to update the current cluster with the workflow-driven schedules that apply to that cluster
+	1/24/19 (CR)	added support for the 'messaging' protocol in transactionCreate to take into account a GET style workflow that was sent over the broker by ExecuteWorkflow_s
+	1/25/19 (CR)	added 3 maint services: logCleanup, garbageCollection and refreshMaintSchedule, the latter which will put the other 2 on the IS scheduler if they don't exist
+					modified the pkgStart service to execute refreshMaintSchedule
+					added a new service fwTransactionRevive, to allow someone to 'revive' a transaction from TFW_TRANS_HISTORY ==&gt; TFW_TRANS_ACTIVE at STEP00
+	1/29/19 (CR)	cosmetic change to processLastError to indicate the proper logs folder
+	1/30/19 (CR)	added generateTransSummaries for generating summary records in TFW_TRANS_SUMMARY
+					modified the refreshMaintSchedule to add this service but also gave it an option to define a specific cluster on which to schedule a service (by port number)
+	1/31/19 (CR)	renamed getActiveWorkflow to getActiveWorkflowInfo and modified it to return additional details about the active workflow
+					modified updateAccessedDate to drop the 2 extra values being returned by getActiveWorkflowInfo
+	2/1/19 (CR)		modified transactionCreate to detect when a document comes in from TN and set the proper knowns
+	2/4/19 (CR)		finished finalizeTrans to delete logs and content according to retention attributes of the workflow
+					modified TMStart to disable the update of the TM_INFO column in TFW_TRANSACTION_ACTIVE
+	2/6/19 (CR)		modified refreshEntireWorkflowSchedule to create the scheduled entries as starting 1/1/2050, so that they don't automatically start - manual intervention is required
+---fully deployed---
+	2/12/19 (CR)	cosmetic change to the logging in updateActiveWorkflow
+					removed traceLogX which was an empty placeholder service
+					modified traceLog to remove unfriendly characters from the trace id, so that the filename will be valid in both unix and windows
+					modified refreshEntireWorkflowSchedule to not cancel unused entries
+					removed updateError which was an empty placeholder service
+					removed some disabled lines from refreshAllInstanceGVs
+					updated to the latest sftp-v93.jar (from 1/29/18) under the Framework_Core/code/jars folder (but not currently used within the framework)
+	2/19/19 (CR)	added support for reading excel files under the 'excel' folder, which also added 4 fairly sizable .jar files to the Framework_Core/code/jars folder
+	2/20/19 (CR)	had to add both client.ftp:login and client.ftp:cd services to fix the dumb design decision of SoftwareAG's versions of the same services
+					modified transactionCreate to capture the input parameters 'folder' and 'filename' as knowns/folder and knowns/filename, if supplied
+					added util:trueEOL service to hardcode the 3 specific types of EOL characters: CR LF and CRLF (modified the flow.xml directly)
+	2/22/19 (CR)	updated util.jsplit:regexSplit to allow for the 'limit' parameter
+	2/25/19 (CR)	modified traceLog to use UTC time
+					modified traceLastError to email the entire group
+					updated getWorkflowByIID to bring back the CONCURRENCY, RETRY_COUNT and RETRY_INTERVAL values from the workflow
+					modified ExecWorkflow_s to honor the RETRY_COUNT and RETRY_INTERVAL values when executing the first step of the workflow
+					modified the fwEnvelopeService GET to honor the RETRY_COUNT and RETRY_INTERVAL values when executing the first step of the workflow (routed from ExecWorkflow_s)
+					added placeholder service execSpawn as the service that should be spawned to execute the first step of the workflow rather than executing inline
+---fully deployed---
+	3/1/19 (CR)		modified sleep service to accept either milliseconds or seconds as input
+					modified traceLastError to do variable substitution on the clusterName variable in the from of the email
+					modified ExecWorkflow_s and fwEnvelopeService (GET) to spawn and call, respectively, the new service ExecWorkflow_wretry
+					modified the logging of all 3 to separate the trace logging of ExecWorkflow_s from each of the workflow's trace logging that it finds and executes
+	3/4/19 (CR)		added spawnFlow as a wrapper for spawnThread to give it the ability to detect if the called Flow service exists rather than not throwing any error
+					modified transactionCreate to capture more from the transport document into the log
+					modified AcceptHTTP to produce a more descriptive message for FE0003
+					modified AcceptHTTP to add an HTTP URL Alias property, allowing this service to be invoked using http://wm01:1555/csfw/AcceptHTTP 
+					modified AcceptHTTP to set the Default xmlFormat property = stream, so that xml documents don't get sent to the service as 'node', but as 'xmlStream'
+	3/5/19 (CR)		moved updateAccessedDate to the 'wf' folder and modified it to not look for the ill-conceived and never used TFW_TRADINGRELATIONSHIP table
+					modified updateAccessedDate to disable the TFW_CLUSTER_PICKLIST update
+					modified getActiveWorkflowInfo to return default workflow info in case the workflow has not been established for a transaction (in the case of discernment)
+					(the above fixes a bug that would occur if the accessed date is being updated for the TFW_DISCERN table)
+					removed some disabled lines from discernDocument
+---fully deployed---
+	3/8/19 (CR)		modified mockHTTPserver to support xmlStream and xmlBytes as well as setting the property Default xmlFormat = stream
+	3/12/19 (CR)	added a missing % in finishContent so that the file would get renamed properly
+					minor change to the logging in getAliasSettingsTrace
+	3/13/19 (CR)	modified ExecWorkflow_wretry to not generate a transaction error on each retry of a GET type service
+					added support in splitExcel for the USE_SHEET_NAMES parameter and removed some debugging code
+					dropped the cc variable in traceLastError
+	3/15/19 (CR)	fixed an issue with the excel readers in how sheets were trimmed
+---fully deployed---
+	3/18/19 (CR)	corrected the fwTransactionResume when the optional step was supplied
+	3/19/19 (CR)	in buildLeaderFromContent1, upped the size of the leader from 7035 to 12035
+					added fwTransactionGraveyard to graveyard transactions when necessary
+	3/25/19 (CR)	modified excel readers to improve the trimming of spreadsheets
+	3/28/19 (CR)	modified transactionStart to extract SOURCE_ALIAS and TARGET_ALIAS from rfts step parameters for use in STEP01 of the transaction (rfts workflows only)
+					synch'ed up the code between getAliasSettings/Trace when updating the accessed date of the settings table
+	4/1/19 (CR)		modified updateActiveSenderReceiverAlias to check for nulls on input and to adjust the logging a little
+	4/2/19 (CR)		updated the copyRFTS system service with improved logging and logic and also to fail if more than 1 file is found on the GET side (only the GetRFTS service can process
+					more than one file in a single transaction)
+					updated ExecWorkflow_wretry to set the thread name
+					updated incrementActiveDeliveryAttempts to support an optional content name (in the case of copyRFTS which delivers from content1-content9)
+	4/3/19 (CR)		updated getAliasSettings/Trace to accommodate the new ENVIRONMENT column in the TFW_TP_SETTINGS table
+---fully deployed---
+	4/9/19 (CR)		added tostring:LongToString as a substitute for the unsupported WmTransformationServices package
+	4/12/19 (CR)	modified the splitIF system service to not fail when any of the child documents fail (such as when a trading partner alias doesnt exist)
+	4/15/19 (CR)	improved the logging a little in ExecWorkflow_wretry
+					updated copyRFTS to use the renamed parameter 'passwordkey' on sftp.jscape:login
+	4/16/19 (CR)	modified pingWithFail to use ping instead of reach
+					updated copyRFTS to use the new pingWithFail service, the new loginWithFail service and the new cdWithFail service
+					registered error FE0529 with the pingWithFail service
+	4/18/19 (CR)	created a new utilp.client.ftp:loginWithFail service to make this a common service
+					created a new utilp.client.ftp:cdWithFail service to make this a common service
+	4/19/19 (CR)	added new cdWithFail, lsWithFile and getWithFail services and updated copyRFTS to call them
+					added schizoLog and schizoFail
+	5/10/19 (CR)	modified the splitExcel system service to not fail when any of the child documents fail (such as when a document is not discerned)
+---fully deployed---
+	5/15/19 (CR)	modified the jscape ls service to work around the java .split method which is broken; also to return a 450 No files found as appropriate
+					modified the lsWithFailS service to convert a standard filename filter to a regex pattern (does not apply to the lsWithFail service)
+					modified the loginWFail service to improve the logging slightly
+	5/29/19 (CR)	added the service registerError (as written by Kam) to provide throttled access to the SDM ticketing system
+					added the utilp/sdm/wsSDM web service client connector to communicate with the SDM (USD) system
+	6/13/19 (CR)	added the streamReadLine service for reading an LF delimited string from an input stream of bytes
+					added the streamSkip service for skipping forward in a stream (calls the java skip method on the stream)
+					added the B2BInfoReader and B2bInfoParse1Message services for scanning the b2b.info log file located on the 18000 cluster (these are temporary services)
+					added tostring:IntegerToString as a substitute for the unsupported WmTransformationServices package
+---fully deployed---
+	6/27/19 (CR)	commented out the 2 calls to registerError since this is not yet working
+					removed *schizoLog from both the log and trace log files
+	6/28/19 (CR)	modified executeWorkflow DELIVERON section to use the TARGET_ALIAS when dealing with rfts workflows
+	7/1/19 (CR)		fixed reference to starting up the garbage collection in refreshMaintSchedule
+					added a log record at the start of transactionStart
+					modified the logic in transactionStart for determining what the transaction's sender alias will be based on whether the workflow is rfts or custom
+					modified getWorkflowByIID to return the remaining fields that are not needed at runtime, but needed by the UI, since this will be shared by both
+					modified updateActiveDocAttributes to make both the sender and receiver aliases optional, to allow for RFTS workflows to update these on the fly
+					improved the comments in updateActiveSenderReceiverAlias
+					fixed logging of the target file in putWithFail
+					modified insertActive to not use 'tbd' for any of the column values in TFW_TRANSACTION_ACTIVE and let them just be null instead
+					fixed a potential issue in processLastError where the error being handled does not contain FEnnnn (is not a framework-style error)
+					updated fwTransactionResume to use a pre-discerned workflowIID if the user is resuming a transaction on STEP00
+					removed all calls to TM* from transactionStart, executeWorkflow, processLastError and traceLastError (the official end of TM)
+	7/17/19 (CR)	modified B2BInfoParse1Message to correctly parse certain usd queue names that were getting skipped
+					in B2BInfoReader, uncommented the calls to registerError and fixed a ticket summary message
+					modified B2BInfoReader to open its reject file for append instead of for output
+	7/18/19 (CR)	updated traceLastError and processLastError to add Matthew.Vavrek@ipaper.com to the distribution
+	7/22/19 (KV)	updated logTicketComment to look for status of tickets before commenting; if closed, this service will reopen them and log the comment, will send
+					email to csengineering@ipaper.com and rvollman@ipaper.com for csengineering and client services repeating issues.
+	7/23/19 (CR)	modified B2BInfoParse1Message to address on unusual error in the log found in mid-July
+					modified B2BInfoParse1Message to suppress "Malformed entity" messages going to Client Services since these are data problems
+	7/24/19 (CR)	modified generateTransSummaries to add logging using autoLog and to purge old summary records
+	7/26/19 (KV)	modified logTicketComment to send email summaries to lolita,marcin,Rafael. Added extralogging to have more visibility , added a remap step to replace null with new
+					counts in check NULL block.
+			  (CR)	added a fix to executeWorkflow to work around a bug in SoftwareAG's implementation of indexOf (see DELIVERON section)
+---fully deployed---
+	7/29/19 (CR)	added sections OAUTHGET and OAUTHPUT in docAliasSettings
+					modified getAliasSettings and getAliasSettingsTrace to support OAUTHGET and OAUTHPUT
+	7/31/19 (CR)	modified B2BInfoReader to remove the 'From line...' prefix on the brief message that gets sent to USD
+	8/14/19 (CR)	modified registerError to stop using SOURCE_ACK column in the TFW_ERROR_LOG table - the column is not needed and will be removed
+					modified registerError to clean up the code a little and support \n in error messages to allow for callers to format their messages a little
+					modified processLastError and traceLastError to start calling registerError
+	8/15/19 (CR)	modified transactionStart to remove an unused call related to TM
+	8/20/19 (CR)	modified registerError to clean up the comments and logging a little, plus return a ticket status message
+					modified the callers of registerError (B2BInfoReader, processLastError and traceLastError) to support the new output parameter
+---fully deployed---
+	8/26/19 (CR)	fixed both traceLastError and processLastError to add a missing $default label prior to calling registerError; also modified the brief error message
+					modified registerError to log when inputs are missing
+	8/27/19 (CR)	modified updateActiveDocAttributes to make all parameters optional - this allows for selective updating later in the transaction
+	9/10/19 (CR)	modified updateActiveStep to set the timestamp to the standard format used everywhere else
+					renamed getNextAvailableDocForDelivery to getFirstAvailableQUEDFORDELVTrans to more accurately represent the nature of the call
+					modified executeWorkflow to address a rare case where a second thread can hijack a transaction and fully deliver it before the first thread can get to its next step in processing
+					(made a backup copy under executeWorkflow_old for reverting back to the old logic if needed)
+---fully deployed---
+	9/23/19 (CR)	added the jexec service for calling out to the Unix shell
+	10/4/19 (CR)	added services getCurrentPackage and getPackageInfo
+---fully deployed---
+	10/7/19 (CR)	modified registerError to report its message as "Recurrence of this error" rather than "New occurrence of this ticket"
+	10/10/19 (CR)	added Ricky back onto the email distribution for errors
+	10/15/19 (CR)	added support for EDI expression evaluation (using } as indicator) in expval
+	10/17/19 (CR)	modified the logCleanup service to maintain logs at 35 days old rather than just 5 days
+---fully deployed---
+	11/7/19 (CR)	modified fwTransactionResume slightly, to return any error message to the caller because the 'caller' will be an interactive user
+					modified fwTransactionRevive and fwTransactionGraveyard to include the transactionid in the failed return message
+	11/8/19 (CR)	modified sftp.jscape:login to support traditional or certificate-based passwords based on the length of the password, rather than the first few characters - this allows
+					for either traditional openssh-type certificates or PuTTY-type certificates (note that PuTTY in this case has nothing to do with the Telnet client application)
+	11/21/19 (CR)	fixed addMinutes to correct the name of the input parameter
+	11/26/19 (CR)	fixed generateTransSummaries to stop one hour prior to the current hour when generating BYHOUR summaries
+	12/2/19 (CR)	modified fwTransactionResume to drop sRows when the transaction was not found
+	12/3/19 (CR)	removed the now obsolete tmcompat folder from Framework_Core (moved to Framework_Testing)
+					removed the now obsolete getActiveTMInfo and updateActiveTMInfo services from Framework_Core (moved to Framework_Testing)
+					modified data.trans:insertActive to not reference TM_INFO in the insert to TFW_TRANS_ACTIVE
+					(all references to TM_INFO now eliminated according to ggrep -r TM_INFO *)
+---fully deployed---
+	12/3/19 (CR)	added 2 new services: updateActiveVars and getActiveVars to support transaction variables that can be used across steps within a workflow
+	12/5/19 (CR)	modified loginWithFailS to not drop some variables before logging
+					fixed reference to UXLR database for mapping instances
+	12/6/19 (CR)	improved streamReadBytes to use less memory
+	12/9/19 (CR)	disabled the refreshMaintSchedule from pkgStart (at Ram's request to partially address the scheduler suspended jobs issue)
+	12/12/19 (CR)	modified getContent to drop the new 'eos' output parameter on the streamReadBytes call
+					modified buildLeaderFromContent1 to drop the new 'eos' output parameter on the streamReadBytes call
+	12/13/19 (CR)	modified finalizeTrans to not clean up content/logs after every transaction - this function will need to be moved to a separate (non-transaction-based) process
+					modified setContent to use the new 'eos' output parameter on the streamReadBytes call
+					modified storeContent1 to use the new 'eos' output parameter on the streamReadBytes call
+					modified mockFTPserver to use the new 'eos' output parameter on the streamReadBytes call
+					modified pipelineSaveSMTP to use the new 'eos' output parameter on the streamReadBytes call
+					modified lsWithFailS to improve logging slightly
+	12/26/19 (CR)	modified generateTransSummaries to add a missing $default label and reset the BYHOURS logic to 800/799 respectively
+	12/27/19 (CR)	modified getWorkflowByIID to eliminate the use of the unused DOC_SEQUENCER column
+					modified updateActiveWorkflow to eliminate the use of the unused DOC_SEQUENCER column
+					modified insertActive to eliminate the use of the unused DOC_SEQUENCER column
+					(all references to DOC_SEQUENCER now eliminated according to ggrep -r DOC_SEQUENCER *)
+					added a new service, retentionCleanup, to be run on a daily basis, since retention cleanup by transaction was determined to be problematic
+	12/30/19 (CR)	modified refreshMaintSchedule to add a reference to the new retentionCleanup service
+	12/31/19 (CR)	added new service zipFiles to create an in-memory zip of a wildcarded set of files
+	1/2/20 (CR)		modified generateTransSummaries to improve logging and wrap the entire service in a TRY/CATCH in order to log any potential errors
+					added some additional logging to getFirstAvailableQUEDFORDELVTrans to try to isolate the intermittent and rare LOCK NOWAIT error
+	1/6/20 (CR)		split the delivery size away from incrementActiveDeliveryAttempts into a new service: updateActiveDeliverySize
+					updated copyRFTS to use the new updateActiveDeliverySize service
+	1/7/20 (CR)		modified copyRFTS to support * in the target temp filename for temp file processing
+	1/10/20 (CR)	enhanced subDTx to support a wide variety of date-based string substitutions
+---fully deployed---
+	1/21/20 (CR)	modified streamWriteString to return the number of bytes actually written (since this is different than the length of the string)
+					modified setContent to use the byteswritten returned by streamWriteString in its check for writing accuracy, rather than the string length
+					modified autoLog to drop the new output parameter byteswritten from the streamWriteString calls (and remove some debugging code)
+	1/22/20 (CR)	modified log to drop the new output parameter byteswritten from the streamWriteString calls
+					modified logStep to drop the new output parameter byteswritten from the streamWriteString calls
+					modified B2BInfoReader to drop the new output parameter byteswritten from the streamWriteString calls
+					modified traceLog to drop the new output parameter byteswritten from the streamWriteString calls
+---fully deployed---
+	1/27/20 (CR)	added objectToString to support the UI service getFlowServices
+	1/28/20 (KV)	modified LogTicketComment by adding verification logic on database calls and removed extended logging
+					modified LogTicketComment logic to archive tfw_error_log entries into tfw_error_log_archive (if the ticket is older than 24hrs OR ticket is closed in sdm)
+					removed PRIMARYKEY CONSTRAINT from tfw_error_log_Archive table, to accomodate repetitive errors of same error_num and error_num_guid-0.
+---fully deployed---
+	2/6/20 (CR)		added utilp.jpipeline.readPipeline to read the entire pipeline into a separate pipeline document (now being used by AcceptHTTP)
+	2/10/20 (CR)	had to fix the branch step in transactionStart that does the test for document dupchecking (flow doesnt support direct document references in labels?)
+					in dupCheck, changed the text and error number for duplicate document checking (now FE0550 instead of FE0000)
+---fully deployed---
+	3/10/20 (CR)	enabled synchronous logic in transactionStart
+	3/17/20 (CR)	created subTVK as a common service for doing transaction variable substitution and known filename replacement
+					slight wording change to FE0516 in getAliasSettings and getAliasSettingsTrace
+	3/18/20 (CR)	temporarily disable the publishFwEvent feature since its not being used
+					fixed problem with regexSplitBetween which would leave the regex expression at the front and back of a single string (one that did not get split)
+					modified splitIF to simplify the logic and also blankIfNull the footer
+	3/20/20 (CR)	fixed minor issue in transactionStart affecting the resuming of transactions from STEP00
+---fully deployed---
+	3/23/20 (CR)	emergency fix to remove debug code from splitIF
+---fully deployed---
+	4/3/20 (CR)		eliminated the unnecessary use of hash2 for dupchecking
+	4/9/20 (CR)		modified sftp/jscape/login to set (alongside the connection timeout) the read timeout based on the input parameter
+---fully deployed---
+	4/13/20 (CR)	removed ricky from the error email distribution
+	4/16/20 (CR)	added support for bulk doc count in transactionCreate
+	4/16/20 (CR)	added support for bulk doc count in insertActive
+	4/21/20 (CR)	modified executeWorkflow under DELIVERON to set the final status message to fatal after a sequence of transient or exists errors
+					added support for bulk processing in getWorkflowByIID
+	4/22/20 (CR)	modified getActiveWorkflowStepInfo to return bulkProcessing from the workflow
+					modified aliasSwitch, executeWorkflow, copyRFTS, splitExcel to drop the new bulkProcessing return value
+	4/23/20 (CR)	modified getContent to support bulk content when determining the size of the content
+					modified cdWithFailS and lsWithFailS to drop a coupla leftover variables from the pipeline
+					modified getAliasSettings and getAliasSettingsTrace to remove passwords from the logs
+	4/24/20 (CR)	modified loginWithFail to not log the password
+	4/30/20 (CR)	modified cdWithFail and lsWithFail to drop a coupla leftover variables from the pipeline
+	5/1/20 (CR)		added com.ipaper.wmframe.core.utilp.client.ftp:exists and existsS as replacements for doing ftp ls commands which can be very slow with large directory listings
+	5/4/20 (CR)		updated execEDSR to use OPT_EDSR_CONTENT to allow overriding the default content1
+					updated renameWithFail/S to correct the use of the schizoFail vs traceFail
+					modified the documentation on the sftp rename service
+					updated copyRFTS to support the new exists/S services
+	5/8/20 (CR)		modified updateActiveMetric* services (including getFirstAvailableQUEDFORDELVTrans) to add two more digits to the size of each SEC_ field
+					modified generateTransSummaries to add two more digits to the size of each SEC_ field;  also retained the BYMONTH records for 15 months instead of 13
+					modified generateTransSummaries in the BYHOUR section to calculate the sum(BULK_DOC_COUNT) as the record_count rather than count(*)
+	5/11/20 (CR)	modified fwEnvelopeService to replace the GET call with EXECWF call
+					modifed pingWithFail to use schizoLog and schizoFail
+					modified ExecWorkflow_s and ExecWorkflow_wretry to maintain a record in the TFW_TRANS_ACTIVE table to indicate each workflow job that is currently running on the
+								scheduler so as to avoid running multiple copies simultaneously (this is the equivalent of 'repeat after completion' and should eliminate the empty transactions in the UI)
+	5/18/20 (CR)	modified docAliasSettings, getAliasSettings and getAliasSettingsTrace to replace references to SAP_DELIVERY and 3 others with SAP_CONN_ALIAS, SAP_RCVPOR and SAP_RCVPRN
+---fully deployed---
+	5/26/20 (CR)	modified getAliasSettings/Trace to support the new SAP_CONN_ALIAS, SAP_RCVPOR, SAP_RCVPRN values
+	5/27/20 (CR)	removed the obsolete getTpProfile service
+					added returnBlankIfNull parameter to objectToString, IntegerToString and LongToString
+	5/29/20 (CR)	modified the redir services to point to the recently upgraded s02acsapiprod/a/b and s02acsapitest/a/b servers (used by the EDSR)
+	6/3/30 (CR)		added extractStrings for getting strings out of documents
+					added getMyStepParms as a simpler way to get component parameters
+					modified execEDSR,splitExcel,splitIF to use the new getMyStepParms service
+					modified ExecWorkflow_s to add the workflow name to the active table when executing a workflow
+	6/4/30 (CR)		modified updateActiveDocAttributes to truncate the documentId to 255 characters (to support bulk processing)
+					modified updateActiveDocAttributes to simplify the logging a little
+---fully deployed---
+	6/12/20 (CR)	added splitIFjson to support the splitting of a JSON doc that uses an array at the highest level
+					added getWorkflowIIDByName to support the splitIFjson service
+	6/16/20 (CR)	added service createRequest
+	6/18/20 (CR)	modified ExecWorkflow_s to set defaults for stepRetryCount and stepRetryInterval
+					modified processLastError to not send emails for failed transactions
+	6/19/20 (CR)	added http:httpl service to call software ag's http service, but also log the input and output
+					added sort:sortDoc service to sort a document list
+	6/26/20 (CR)	fixed a bug in updateActiveWorkflow where ' single quotes in a workflow (typically in a component's parameters) were causing failures in saving to the transaction
+---fully deployed---
+	6/29/20 (CR)	fixed the logging in httpl to log the output header lines properly
+	7/6/20 (CR)		modified pipelineSaveRandom to remove the unused sFwTransactionid from input
+	7/7/20 (CR)		modified subDTx to support $DT3-3D$ format
+	7/9/20 (CR)		modified subDTx to support $DT3-2D$ format
+	7/10/20 (CR)	modified httpl to combine timeout and connectTimeout (eliminating the latter as a parameter) and convert it to usecs
+					modified transactionFail to not publish a fwEvent message
+					modified processLastError to not create a USD ticket
+					added lastIndexOf java service
+					modified splitIFjson to support an array that is not at the start of the json document
+	7/15/20 (CR)	modified extractStrings to support a / in the string name to allow component parameters to build 'doc-like' structures for use in workflows
+	7/16/20 (CR)	modified docAliasSettings under HTTPGET: changed the unused ENCODING field to TYPE_ACTPSVSEC so as to support Basic,Bearer,Digest and NTLM
+					modified getAliasSettings/Trace under HTTPGET to change the use of ENCODING to TYPE_ACTPSVSEC so as to support Basic,Bearer,Digest and NTLM
+	7/21/20 (CR)	added the csfwping service in preparation for setting up a load balancer address for documents that get 'pushed' into the framework
+					modified transactionStart and transactionEnd to not publish a fwEvent message
+---fully deployed---
+	7/21/20 (CR)	modified docAliasSettings under HTTPPUT: changed the unused ENCODING field to TYPE_ACTPSVSEC so as to support Basic,Bearer,Digest and NTLM
+	7/23/20 (CR)	modified getWorkflowIIDByName to use schizoFail rather than transactionFail (and splitIFjson to call it properly)
+					modified splitIF to supply the workflowIID on the transactionStart call - this eliminates the need for discernment for the children of a parent that doesnt use discernment
+					modified updateActiveStatus to truncate the status message to 3000 characters to keep it well under the 4000 character oracle limit
+	7/29/30 (CR)	modified unzip to return a better message when the input bytes does not contain a recognizable zip
+					modified csfwping to add the instance spec to the response message
+	7/30/20 (RB)	modified t998 schema in edi/v4010 - ZD reference was not defined. deleted that and hardcoded ZD segment same as in legacy environment   
+	8/17/20 (CR)	added pgpEncrypt, pgpDecrypt as system services
+					added xor for xor'ing stuff together
+					added Framework ID Allocator to the refreshMaintSchedule service
+---fully deployed---
+	9/7/20 (CR)		modified lastIndexOf to support the third parameter as optional, as stated
+	9/11/20 (CR)	modified updateActiveStatus to allow BROKERED as a status - this will be used for all transactions, but in particular, for distributed transactions
+					modified executeWorkflow to detect when a transaction is moving to/from a distributed system (and hence, from one database to another), setting the status to BROKERED
+					modified fwEnvelopeService to set the status back to INPROCESS again after coming off the broker
+	9/15/20 (CR)	modified updateActiveVars to fix the log message
+					modified publishFwEnvelope and fwEnvelopeService to change TEST to TRIAL to be less confusing when simply testing the broker setup
+	9/16/20 (CR)	added z_updateActiveWfSteps to update the TRANS_ACTIVE table's WORKFLOW_STEPS column
+					modified (and renamed) z_updateActiveWorkflow to call the new z_updateActiveWfSteps
+					added z_replaceActive to handle a spanning transaction across the wide area
+					added z_replaceContent to handle a spanning transaction across the wide area
+					renamed insertActive to z_insertActive
+					renamed finalizeTransaction to z_finalizeTransaction
+	9/24/20 (CR)	added BooleanToString and DoubleToString (from WmTransformationServicess package)
+	10/2/20 (CR)	modified splitIFjson to account for an array of documents that exists, but has 0 elements
+					modified getAliasSettings/Trace to improve logging
+	10/5/20 (CR)	cleaned up the comments on getActiveVars, updateActiveVars, and getActiveWorkflowInfo
+					renamed getActiveWorkflowStepInfo to z_ (affects the DeliverFTP and DeliverRFTS services)
+					renamed incrementActiveDeliveryAttempts to z_
+					renamed updateActiveMetric* to z_
+					renamed updateActiveStatus,Step to z_
+					renamed advanceWorkflow*,dupCheck,getFirst*,getWorkflow*,isTransSusp,lookupAlias* and updateAccDate to z_
+					renamed buildLeaderFromContent1 to z_
+					renamed logStep to z_
+---fully deployed---
+	10/12/20 (CR)	modified transactionStart to set the status to BROKERED when brokering any asynchronous transactions (also set the extfield2 to the clusterFrom)
+					modified refreshAllInstanceGVs to append MAPGRP1 to the end of the central cluster list so that workflow references to MAPGRP1 arent treated as 'distributed' instances
+					modified fwEnvelopeService to update the broker metric a little sooner; also improve some of the comments
+	10/14/20 (RCZ)	modified createRequest by adding optional field requestDefaultQueue to store default ticket queue
+					  Removed blankIfNulls and added logic to lookup SDM for the fields missing from input, new logic to handle requestArea conversion to requestAreaIID
+	10/16/20 (CR)	added StringToDouble and StringToLong services
+	10/26/20 (CR)	modified csfwping to use csfw/ping as its alias, instead of csfw:ping, to be consistent with other usages
+	10/27/20 (CR)	cleaned up the documentation in getStrings
+					modified storeContent1 to also set content0, if the call is an http call
+					modified getContent to support content0, where http headers will be saved, if applicable
+	10/30/20 (CR)	modified lsWithFailS to not drop filenamepattern as an input variable
+---fully deployed---
+	11/19/20 (CR)	modified csfwping to update the documentation and change the failure return value from 503 to 590 to be consistent with AcceptHTTP
+	11/23/20 (CR)	added dbDyn2CentralDBTrans and updated idAllocator to use it, along with a generic lock on the DUAL table, to allocate sequence numbers that should now be consecutive
+	12/3/20 (CR)	modified generateTransactionSummaries to stop the BYHOUR loop after 798 iterations because it was inappropriately calculating the current hour
+---fully deployed---
+	12/10/20 (CR)	enhanced the retentionCleanup service to improve how it cleans up older transactions
+	12/17/20 (CR)	modified getAliasSettings/getAliasSettingsTrace to extract TYPE_ACTPSVSEC when getting the HTTPPUT setting from an alias setup - this was missed
+	12/18/20 (CR)	added oldTransactionCleanup service to go back 90 days and clean up transactions, content and logs that wasnt caught by the standard retention process (temporary)
+	12/21/20 (CR)	modified addFxEnvelope to fail when from org/loc, to org/loc, or the subject, paylodType or version are blank
+	12/28/20 (CR)	in setContent and storeContent1, increased the byte read count in the loop of storing content, to improve performance
+	12/30/20 (CR)	added sortStringlist to sort a simple string list in place, either ascending or descending (softwareag's implementation of ftp ls does not work)
+					added truncateStringlist to truncate a list of strings
+	1/4/21 (CR)		modified lsWithFail to support sorting the remote directory listing by name, date or size; also now allows you to limit the number of files returned in the listing
+	1/5/21 (CR)		modified sftp.jscape.ls to return both the sizes and dates of files for use in sorting the list of files
+					modified lsWithFailS to support sorting the remote directory listing by name, date or size; also now allows you to limit the number of files returned in the listing
+---fully deployed---
+	1/14/21 (CR)	modified subTVK to allow * substitution to be optional - asterisk is normally used to substitute the known filename
+	1/18/21 (CR)	modified lsWithFail/S to use a more reliable way to return the directory listing properly from various FTP servers
+	1/21/21 (CR)	updated pgpEncrypt/pgpDecrypt services to support signing, plus a required PGP_RECIPIENT component parameter
+	1/22/21 (CR)	modifed csfw/ping to create a PINGED file when requests come to it (normally from the NetScaler load balancer) - this is to facilitate testing of this feature
+	1/26/21 (CR)	modified docAliasSettings to add a new field SAP_MANDT to be used for the SAP client number in DeliverSAP
+					modified getAliasSettings/Trace to support returning the new field SAP_MANDT to caller
+					modified setContent to add a comment and assign 3 error numbers to its 3 error messages
+	1/29/21 (CR)	improved the retentionCleanup service with better logging and to not fail when a folder is missing
+					added retentionCount service to perform the same logic as the retentionCleanup, but only generate counts, rather than actually clean them up
+	2/1/21 (CR)		modified transactionStart to properly fail on a disabled workflow when the document is pushed and discernment is used
+					modified z_updateActiveStatus to convert the status from FAILED to ABANDONED if the status is currently ACCEPTING, to indicate that there is no content
+---fully deployed---
+	2/10/21 (CR)	added splitIFflat to split .csv files based on DelimEOL
+	2/24/21 (CR)	modified transactionStart, z_insertActive and z_updateActiveSizeHashes to support failsafe mode on 28000
+					added checkFailsafeMode to return the state of failsafe mode, whether OKCONTINUE or OKQUEUEIT
+					added z_logQueue to log a queueing message to the transaction's queue file in support of failsafe mode on 28000
+					modified transactionStart to not explicity check for 'custom' workflows, but allow it to be the default - this will support upcoming changes in the UI
+	2/27/21 (CR)	created idPreAllocator service to replace idAllocator to centralize all of the individual id allocators (also renamed idAllocator to x_idAllocator)
+					modified sanityCheck to not check for idAllocator on startup
+					modified allocateTransactionid to get ids from the new centralized folder
+	2/28/31 (CR)	improved the error messages of loginWithFail/S services
+	3/3/21 (CR)		added the service splitIFjsonCount to support splitting an input json document by SPLIT_COUNT elements
+---fully deployed---
+	3/8/21 (CR)		modified checkFailsafeMode to read a status file in csfwping/fw_STATUS.txt to determine the status of the framework
+	3/12/21 (CR)	added executeWorkflowTC as an optional try/catch wrapper to executeWorkflow
+					modified fwEnvelopeService to spawn its calls off the broker, rather than execute them directly (to unlink from the broker)
+					modified fwEnvelopeService catch block to not throw errors back to the broker, in lieu of spawning its call to executeWorkflowTC
+	3/13/21 (CR)	modified z_getFirstAvailableQUEDFORDELVTrans to reduce the NOWAIT blocking 
+	3/14/21 (CR)	reverted one of the changes to fwEnvelopeService to link executing a workflow to the broker
+	3/17/21 (CR)	reverted the other change  to fwEnvelopeService to link executing a schedule to the broker (now back to being fully tethered to the broker)
+---fully deployed---
+	3/22/21 (CR)	added flushFSqueue for initial testing
+	3/23/21 (CR)	renamed refreshEntireWorkflowSchedule to the more simpler refreshSchedulerTracts - this service is run manually
+	3/25/21 (CR)	added 7 more failsafe services that will support failsafe mode during maintenance
+	3/31/21 (CR)	removed the call to registerError from traceLastError
+					added the service z_getDevByWfIID
+	4/1/21 (CR)		modified the sftp jscape ls service to exclude directories from the list of files
+					modified traceLastError to email the developer of the workflow
+					modified ExecWorkflow_wretry to call processLastError (on failures) on each iteration of the retry loop, rather than once after the loop
+	4/6/21 (CR)		modified generateTransSummaries to hold onto the monthly summary numbers for 27 months rather than just 15
+---fully deployed---
+       4/14/21 (CR)	modified putWithFail to allow transfermode as an optional parameter that defaults to binary - this is to support the AS400 which requires ascii ftp transfers
+	4/16/21 (CR)	modified existsS to check for an additional 'OK - file renamed' message to determine if a file exists
+---fully deployed---
+	4/26/21 (CR)	modified docAliasSettings to add a FILESYS section to support the new GetFileSystem and DeliverFileSystem
+					modified getAliasSettings/Trace to support FILESYS for GetFileSystem and DeliverFileSystem
+	4/28/21 (CR)	added copyLocal to support GetFileSystem and DeliverFileSystem
+					removed the obsolete x_idAllocator
+					modified getContent (size) to return a more accurate byte count when delivering using bulk content
+					updated getMyStepParms to remove rfts-type logging for non rfts workflows
+	5/5/21 (CR)		updated the logging in the FS services
+---fully deployed---
+	5/24/21 (CR)	modified the retentionCleanup services to improve performance by spawning off each workflow into its own thread and act on a set of workflows
+					modified oldTransactionCleanup which uses the retentionCleanup services
+	5/25/21 (CR)	changes to the failsafe services after some additional testing
+---fully deployed---
+	8/16/21 (CR)	added new service translateEOL to perform end-of-line conversion using EOL_CONVERSION = LF2CRLF or CRLF2LF
+	8/18/21 (CR)	modified both z_updateActiveWorkflow and z_updateActiveWfSteps to fix a rare bug with how quoted strings are handled in Oracle
+---fully deployed---
+	9/3/21 (CR)		modified pgpEncrypt to require a SIGNATURE_KEY to specify which signature to sign with during encryption
+	10/7/21 (CR)	uxlr change: renamed service from checkAccessedDate to checkCMADate and moved it to the util folder
+					uxlr change: added new service uxlrSaveSimple for access to the legacy UXLR table
+					uxlr change: added uxlr:lookup and uxlr:save to access the new table TFW_UXLR that is now in the framework database
+	10/13/21 (CR)	removed a little bit of logging from updateActiveDocAttributes
+	10/18/21 (CR)	modified the documentation in failsafe/step4/5/6 services
+					added a _Failsafe_Instructions service that shows how to use Failsafe mode (see the comments tab)
+---fully deployed---
+	11/11/21 (CR)	added a logging record to ExecWorkflow_wretry to indicate about to delete the record in the active table
+	11/23/21 (CR)	added a new cleanup service, windirCleanup, which uses the output of a windows dir /s command to clean up old files that were missed by other cleanup routines
+	12/6/21 (CR)	modified both uxlr:lookup and uxlr:save to use the 'schizo' calls instead of the traditional calls, so that these services can be used in accept/get services
+	1/31/22 (CR)	modified pgpEncrypt to search for " encrypted for: " instead of "RSA/AES256 encrypted for" since different encryption algorithms can be used for each partner
+	2/2/22 (CR)		split out the fnredir into its own package, Core8
+---fully deployed---
+	2/16/22(RB)		changed edi schema T404.  added N9 segment to the REF segment of the N7 segment.
+	2/18/22 (CR)	modified fwEnvelopeService to log the broker UUID to attempt to understand the issue of 2 documents received for 1 document published (P176874746)
+---fully deployed---
+	2/22/22 (CR)	modified fwEnvelopeService to add duplicate detection on the broker UUID's to hopefully block the broker sending duplicate messages off a single publish
+---fully deployed---
+	3/2/22 (CR)		in fwEnvelopeService, improved logging and comments around the duplicate detection code
+					moved the maint/failsafe services to core7
+---fully deployed---
+	3/10/22 (CR)	moved the SDM soap interface to Core8
+	3/11/22 (CR)	moved the createRequest service to util/ticketing (from utilp), added createAccouncement
+					added 2 new services: registerErrorSDM and registerErrorSN to specifically go to either SDM or SN and then replaced registerError with
+						a call to one or both of the above depending on whether /csutil/framework/genIncidentsInSDM.txt and genIncidentsInSN.txt exist
+	3/15/22 (CR)	added 2 new services: createAnnouncementSDM and createAnnouncementSN to specifically go to either SDM or SN and then replaced 
+						createAnnouncement with a call to one or both of the above depending on /csutil/framework/genAnnouncementsInSDM.txt and SN.txt
+					added 2 new services: createRequestSDM and createRequestSN to specifically go to either SDM or SN and then replaced 
+						createRequest with a call to one or both of the above depending on /csutil/framework/genRequestsInSDM.txt and SN.txt
+---fully deployed---
+	3/29/22 (CR)	added updateAnnouncement/SDM/SN services
+	4/1/22 (KV)		modified updateAnnouncementSN to correct the url
+	4/5/22 (CR)		repurposed transactionEnd call to be callable from a map to force an end to the transaction without erroring, basically replacing the service
+					z_advanceWorkflowToLastStep - services affected are transactionEnd, z_finalizeTrans, executeWorkflow, also splitIF, splitIFflat, splitIFjson, splitIFjsonCount
+	4/7/22 (KV)		modified createRequestSN to add logic to create requests in SN, catalog items and add to cart options
+					modified registerErrorSN to add Test webmethodsCloud URL and changed exit ongenloop for branch on logic
+---fully deployed---
+	4/12/22 (KV)	changes to support conversion from SDM to ServiceNow:
+						registerErrorSN - append SN to errorNumber, so we can get the split route working and then remove at the end of the service
+							added getfile… to get SNurl from a file; prod credentials; unicode replacement for CRLF
+						createAnnouncementSN - added unicode replacement for CRLF; added getfile… to get SNurl from a file; prod credentials
+						createRequestSN - added unicode replacement for CRLF; hardcoded catalog url’s and checkout url’s; prod credentials
+							hardcoded body to suit placing request; removed disabled steps
+						updateAnnouncementSN - added Unicode replacement for CRLF; added getfile… to get SNurl from a file; prod credentials
+---fully deployed---
+	4/26/22 (CR)	updated registerError*, B2B*, createRequest* and updateAnnouncement to fix the logging to go to the proper trace/transaction logs
+---fully deployed---
+	5/5/22 (CR)		added a new service subSYSv to allow substitution of the known folder, filename and csutil
+					modifed the comments in subTVK, which were a little misleading
+	5/6/22 (CR)		modified transactionEnd to throw a FWTRANSEND message
+					modified processLastError to check for FWTRANSEND as an error and discontinue error processing so that the transaction can end quietly
+	5/17/22 (CR)	moved refreshSchedulerTracts to Core7
+					moved the misc folder to Core7
+	5/23/22 (CR)	updated z_updateActiveWorkflowSteps to put the workflow's REMEDIATION field into the active table; also renamed z_UpdateActiveWorkflowSteps
+					corrected a couple of comments in z_finalizeTrans
+					added a call to z_finalizeTrans to the transactionEnd service to move the transaction out of the ACTIVE table into the HISTORY table
+ 	5/24/22 (KV)	registerErrorSN
+					added new values to TicketAreaTransformer which gets converted to Categoryiid and subcategoryiid
+					changed password for Test landscape , because of SN dump to lower tiers
+					CreateRequestSN
+					added Transformer map step to look up id's for category and subcategory
+					added new values to TicketAreaTransformer which gets converted to Categoryiid and subcategoryiid
+					changed password for Test landscape , because of SN dump to lower tiers
+					removed catalog item look up and using API_generic catalog id
+					removed try/catch block and changed the return value to send Ticket number incase of success or POSTstatus and Header content in case of error
+	5/24/22 (CR)	added back misc/removePrettyPrint (now in both places)
+					added back formatNumberForDisplay (now in both places)
+---fully deployed---
+	5/31/22 (CR)	updated getWorkflowByIID to include the new REMEDIATION column
+       6/03/22 (RB)	changed edi schema T850.  added MTX segment to the ST/N9 segment.
+			(CR)	added initial version of fwTransactionRemediate as a supplement to *Graveyard and *Resume
+---fully deployed---
+	6/21/22 (CR)	updated subSYSv to conditionally replace $FOLDER$ and $FNAME$, so that this service can be called in trace mode for $CSUTIL$
+					modified z_getFirstAvailableQUEDFORDELVTrans to add a blankifnull check on sNewTransactionid (for logging)
+	6/22/22 (CR)	modified ExecWorkflow_wretry to add ******** in the logging for improved readability
+	7/13/22 (CR)	updated extractFxPayload to also return the opaqueSubject from the fx envelope for use in EDI handling
+	7/29/22 (CR)	modified getContent (size) to also return the count of documents, so that bulk handlers can get a correct document count of delivered documents
+					modified updateActiveDeliverySize to also update the BULK_DOC_COUNT field to record the correct count of bulk document deliveries
+---fully deployed---
+	8/16/22 (CR)	modified readXLS and readXLSX to stop using the first row in the sheet to determine the number of columns - instead guess from 1000 columns backwards
+					modified subDTx to support substituting $DT5$ with YYYYMM, the current year/month
+	8/18/22 (CR)	modified subDTx to support substituting $DT6$ with YYYYMMDD, the last day of the prior month
+---fully deployed---
+	9/13/22 (CR)	created new service registerErrorSNE to improve logic and eliminate Oracle errors
+					started new folder structure without com.ipaper
+	9/15/22 (CR)	modified genXmlSuffix to account for comments in the xml document (using an exclamation point); also moved these to new folder
+	9/22/22 (CR)	modified traceLastError to cc the CSEngineering team when there are PKIX errors
+	9/27/22 (CR)	moved four utilp services to new folder structure and renamed them with z_ (allocateTransid,analFtpCode,checkCMA,failIfInvalidClus)
+					moved three utilp java service folders (jcache, jping, jxor)
+					modified jping:ping to accept 50% packet loss messages as a successful ping
+---fully deployed---
+	10/5/22 (CR)	added prettyXml as a utility service
+	10/12/22 (CR)	fixed a spelling mistake in z_getDevByWfIID emeaaipaper =&gt; emeaipaper (also moved to fwcore)
+					moved a number of z_ services under the data/trans and data/wf folders to fwcore
+	10/17/22 (CR)	switched core.event:registerError to use the new fwcore.event:registerErrorSNE service
+---fully deployed---
+	11/8/22 (CR)	modified idPreAllocator to use a properties file and to not create the 'running' file; also moved it to fwcore.schedule
+	11/10/22 (CR)	modified z_getFirstAvailableQUEDFORDELVTrans to use FETCH FIRST 1 ROWS ONLY and FOR UPDATE WAIT 60
+					modified fwEnvelopeService to explain the 'Thread abort notification' failure a little better in the email that is generated
+	11/11/22 (CR)	moved the startup folder to fwcore and modified the services to use traceLog
+	11/14/22 (CR)	modified registerErrorSNE to deal with embedded cr/lf/tab
+---fully deployed---
+	11/15/22 (CR)	modified idPreAllocator to not exit the flow if there is an Oracle error - just continue with checking the current cache
+	11/21/22 (CR)	modified expeval (under discernment) to blankifnull the input expression, truncate it to 150 chars, and remove  any \r \n
+					modified updateActiveDocAttributes to call a new private service z_sqlFragUpdate to clean up bad attributes in the transaction
+	11/22/22 (CR)	modified expeval to not drop the sKnown* variables since these are now input parameters
+---fully deployed---
+	12/6/22 (CR)	modified z_insertActive to replace ' quotes with ? question mark in the sKnownFilename to fix an issue with certain SAP filenames 
+---fully deployed---
+	12/16/22 (CR)	modified expeval, under the EDI expression section, so that if an IEA record is not found, its likely due to the content being
+					truncated, so just extract all of the rest of the content so that EDI evaluation can continue
+	1/9/23 (CR)		modified z_isTransactionSuspended to add an ORDER BY ENVIRONMENT DESC,CLUSTER_NAME DESC clause, which was missing
+---fully deployed---
+	2/1/23 (CR)		modified splitIF to support OPT_SPLIT_CONTENT=contentx where content1 is the default
+	2/2/23 (CR)		modified z_buildLeaderFromContent1 to check for &lt; within the first 2 chars (instead of 10) to avoid binary files that randomly contain &lt;
+---fully deployed---
+	2/16/23 (PK)	added tokeRefreshBY service to generate/refresh the token for TMAP/Blue Yonder Implemetation
+       2/22/23 (RB)	changed edi schema T850 under edi.X12.V4010:  added MXT  segment to the P01 segment.
+	2/22/23 (CR)	updated 3 flow services to accommodate verry large workflows, such as CustDataFromSAPToMultiple-AR-I041-Cust-Noon:
+						data.trans:getActiveWorkflowInfo, data.trans:z_getActiveWorkflowStepInfo, data.wf:getMyStepParms
+---fully deployed---
+	3/3/23 (CR)		added new service excel.hssfw:writeXLS to enable the creating of old-style XLS spreadsheets (came from legacy 11000)
+	3/6/23 (CR)		update writeXLS to not automatically append .xls to the filename so that this service can operate more appropriately in the framework
+---fully deployed---
+	3/13/23 (CR)	updated the jscape library from v93 to vXX (jscape has not provided us an official version number) to fix a 'Common algorithms' error
+---fully deployed---
+	3/28/23 (CR)	updated all 5 date.jadd services to include an optional timezone parameter, so that the date can be returned for a particular timezone instead of defaulting to local
+					updated the httpl service to support $TOKEN:xxxx$ references in the http header
+	3/29./23 (CR)	added a new service  fwcore.util:serialize  to serialize code execution around a supplied serialid 
+					deleted sftp-v93.old (2286970) from the code/jars folder now that the sftp-vXX.jar (2507360) file seems to be stable
+	4/5/23 (CR)		based on testing, updated httpl to include a check if headers are null
+	4/6/23 (CR)		modified publishFwEnvelope to replace old calls to log/fail with schizoLog/schizoFail
+					updated validateFwTrigger to check for the correct fwEnvelope trigger values
+					updated the comments in fwEnvelopeService
+					modified z_getActiveTransaction to increase workflow step sections from 6 to 15 for larger workflows; also to zip and Base64encode both the active record+content
+					modified z_replaceActive to do Base64 decoding and unzipping of the active record and replacing it in the db, but also to NOT use transactional support anymore
+					modified z_replaceContent to do Base64 decoding and unzipping of the content
+	4/11/23 (CR)	modified pingWithFail to use pingstatus instead of status to avoid the potential for a conflict with that variable name
+	4/17/23 (PK)	added support for gzip to unzip service as well as support for input/output files
+---fully deployed---
+	4/18/23 (CR)	deleted schedule:tokenRefreshBY which is now obsolete
+					added z_updateActiveLink to update the KNOWN_MESSAGE_TYPE column in the active table for use by the UI for distributed transactions
+					modified executeWorkflow to call z_updateActiveLink when brokering CENT-&gt;DIST or DIST-&gt;CENT
+					modified publishFwEnvelope to remove all the old UM logic and just simply publish the fwEnvelope
+					started updating fwEnvelopeService to support a new operation STATUSUPDATE (not complete)
+					started adding z_updateActiveStatusStep (not complete)
+					modified z_updateAccessedDate to stop supporting TFW_CLUSTER_PICKLIST
+					modified fwcore.startup:refreshAllInstanceGVs to remove obsolete global variables related to UM
+	4/25/23 (RB)  	created edi schema T210 and document T210DT  under edi.X12.V4010: for Motor carrier freight invoices.
+	5/17/23 (CR)	updated subDTx to support $DT7$ and $DT7-6D$
+	5/24/23 (CR)	modified event:log service to force inserting a colon in the timezone since the regex expression stopped working in IS10.15
+			(PK)	modified jping:ping to accommodate the differences in command-line pinging between SunOS and Linux
+	6/12/23 (RB)	changed edi schema T210 and document T210DT  under edi.X12.V4010: for Motor carrier freight invoices to allow multiple ST segment.
+       6/13/23 (RB)	changed edi schema T214 ,T990  and document T214DT, T990DT  under edi.X12.V4010: to allrow multiple ST segment.
+	6/27/23 (KV)	modified registerErrorSN to add additional SN ticket-area names in the hard-coded lookup tables - see the first MAP step
+					under the input validation section - also, changed the default for null values for category and subcategory from software/webmethods 
+					to SAP/SAP - see the second MAP step under the input validation section
+---fully deployed---
+	6/29/23 (KV)	modified the correct version of registerErrorSNE
+	7/11/23 (MS)	modified registerErrorSNE to mapping the ticket queue to category and subcategory (instead of ticket area)
+---deployed to 18000 only---
+	7/27/23 (PK)	modified the B2BInfoParse1Message to add a condition based on the OS in the substring fuction
+	7/28/23 (CR)	modified ExecWorkflow_s to only select workflows that are defined to start on the current cluster, rather than all workflows by tract
+						(running this for a specific workflow will still start regardless and will still broker if necessary)
+					modified ExecWorkflow_wretry to remove one line of logging
+					modified updateActiveDeliverySize and getContent to add debugging messages to address a linux performance issue
+---fully deployed---
+	8/8/23 (CR)		modified fwEnvelopeService to put its TRIAL pipeline file under csutilBaseFolder, instead of in the default pipeline folder
+	8/14/23 (CR)	modified 'serialize' to not fail the transaction if the code 'times out' on the serialization file - instead, overwrite the file with a new one
+					(this is taking the position that after 3 minutes, the original serialization transaction has probably failed - note this was only seen in test, 
+					likely due to a developer debugging their way through the serialization code)
+					added z_updateActiveMetricMimeType as a debugging service to address the linux performance issue - called from GetFTP
+			(PK)	added discernContent parameter to transactionStart service
+					added optDiscernContent parameter to z_buildLeaderFromContent service (and moved to fwcore)
+---fully deployed---
+	8/21/23 (PK)	modified expeval for 10.15 changed the substitutions in regex from \\$&amp; to \\$0 for EDI. \\$&amp; does not work in 10.15
+					modified expeval and added "\-" to the search pattern for EDI
+	9/11/23 (CR)	modified transactionStart to use a picklist for discernContent
+					modified fwTransactionResume to add an optional input parameter, optContent, specifying which content to perform disernment on
+	9/28/23 (CR)	updated all startup:pkgStart services to improve the logging and add MAPGRP2
+	9/29/23 (CR)	added a new system:padContent service
+	10/3/23 (CR)	modified the serialize service to use temp filenames and random waits
+	10/3/23 (CR)	modified httpl to TRY-CATCH the token call so that the serialize/end call can be performed on an http failure
+---fully deployed---
+	10/11/23 (CR)	modified getAliasSettings to support the new AS2 settings in the TFW_TP_SETTINGS table
+					modified docAliasSettings to support the new AS2 settings in the TFW_TP_SETTINGS table
+	10/13/23 (CR)	modified getAliasSettingsTrace to support the new AS2 settings in the TFW_TP_SETTINGS table
+---fully deployed---
+	10/26/23 (CR)	emergency change to subTVK to allow the * asterisk character in filenames to handle JPMC transactions going to 11000
+						(this should never be needed long term, since * in a filename is not permitted - its only here because of the way Raghu wrote
+						 the EDI code on 11000 - see Enterprise_EDI/com.ipaper.enterprise.wm.edi.ediint:createEDIINTDeliveryDocument on 11000)
+---fully deployed---
+	11/29/23 (PK)	added new service fwcore.utilp.jcertconvert:certConvertToX509 to convert the certificate into X.509 format
+	12/6/23 (CR)	added a new folder uisupport and moved 5 key services from the Framework_UI package into this Framework_Core package:
+						cleanAngleBrackets, Framework_Core_getFile, Framework_Core_listFiles, uiLog and validateToken
+					modified z_buildLeaderFromContent to put a TRY-CATCH block around the genXmlSuffix service to handle invalid xml documents
+---fully deployed---
+	12/13/23 (PK)	added a new system service fwcore.system:createMIMEContent to create multipart data
+					added a new system service fwcore.system:zipContent to zip the content based on the input content
+					modify the zip service to have gzip support
+       12/13/23 (PK)	changed the logic fwcore.system:createMIMEContent to build a list from parameter and use in the loop
+       12/21/23 (GM)	changed flow service settings of all flows under uisupport to be anonymous
+	12/26/23 (CR)	modified traceLastError to cc connectivity.solutions@ipaper.com on trace failures instead of just me
+	12/27/23 (CR)	added 2 new services, util:suspendAllActiveTasks and util:resumeAllSuspendedTasks that can be invoked from the scheduler screen
+	01/04/24 (PK)	modified the createMIMEContent service to split the parameter between header and body  and added the opt_content_attchment_in parameter to show the content attached to the body of the request
+	1/4/24 (CR)		copied the updateTrans service from the Framework_UI package into this Core package so that it is available for the distributed instances
+	1/6/24 (CR)		updated all 3 uisupport flow services: getFile,listFiles and updateTrans to not use output templates and use the Accept header parameter instead
+---fully deployed---
+	1/9/24 (CR)		corrected issues with 3 uisupport services getFile,listFiles and updateTrans
+	1/16/24 (CR)	added new uisupport service getSchedulerEntries
+	1/19/24 (PK)	added a new service, removeNulls, to support Ariba putting invalid nulls at the begining of their zip files
+---fully deployed---
+	1/30/24 (CR)	updated schedule:B2BInfoParse1Message to properly parse messages that now have longer Linux server names (from wm52a to u02awm52a)
+	2/9/24 (CR)		modified getAliasSettings to unify and eliminate getAliasSettingsTrace - also moved this modified service to fwcore
+					   (affected services: addFxEnvelope, updateActiveDocAttributes, updateActiveSenderReceiverAlias, aliasSwitch, executeWorkflow, copyRFTS)
+					updated both of the 'com.ipaper' getAliasSettings and getAliasSettingsTrace to point to the new fwcore.data.wf:getAliasSettings - both of these
+					   are now superceded by the fwcore version
+					modified httpl service to no longer do token refresh logic - the token refresh process is now a separate scheduled job called tokenRefresh
+	2/12/24 (CR)	modified getAliasSettings to do a uxlrlookup on Z$$EXTSETTINGS and return if available
+					added new service utilp:jpipeline:putString
+					updated docAliasSettings to provide for EXTSETTINGS.TPDELIVERYPROTOCOL
+---fully deployed---
+	3/6/24 (GM)	modified validateToken to support druser
+	3/8/24 (CR)		updated getJdbcEntries with minor improvements
+	3/12/24 (RB)	modified edi/v4010. added new segment to dictionary - B3B and C4. add new  schema T410 and  Recod T410DT
+	3/15/24 (CR)	changes to content:getcontent and z_updateActiveMetricOther to support metric collection for the solaris-&gt;linux conversion
+					modified utilp.client.ftp:getWithFail to support ascii mode FTP in support of AS400USEASCII
+---fully deployed---
+	3/25/24 (CR)	modified addFxEnvelope to add support for 'style3' which is an fxEnvelope with a body but no payload
+	4/4/24 (CR)		modified transactionStart to do a second evaluation attempt when UNRECOGNIZED TERM errors are detected
+					added new utilp.client.imap services in support of email processing
+---fully deployed---
+	4/17/24 (CR)	modified transactionCreate to support IMAP as a protocol
+					moved the old httpl service out of the way
+					added a new fwcore.util:mimedocToEmaildoc service
+	4/19/24 (CR)	added a new fwcore.util:readToken service
+					modified httpl to call the new readToken service instead of doing the work directly
+					modified getContent to support 'mimedoc' in the getAs parameter, returning a mimeDoc as output
+	4/22/24 (CR)	the following 4 changes are to support resuming failed transactions where the transaction was started with a workflow iid (saved in the WORKFLOW_NAME column):
+					- modified z_insertActive to accept an optional workflowIID as input and place it in the WORKFLOW_NAME column of TFW_TRANS_ACTIVE
+					- modified transactionCreate to accept an optional workflowIID as input and pass it thru to z_insertActive
+					- modified z_updateActiveStatus to return the active WORKFLOW_NAME field as wfName (also moved to fwcore)
+					- modified transactionStart to use the WORKFLOW_NAME field as a workflow iid
+					(also affected: fwTransactionResume, executeWorkflow, fwEnvelopeService, processLastError, transactionEnd and z_finalizeTrans)
+					moved z_updateActiveStep, z_updateActiveWorkflow, z_updateActiveWorkflowSteps to fwcore
+					modified z_buildLeaderFromContent to return sDocStructure rather than just sDocIsXml - old code renamed to xx_
+					modified z_discernDocument to use sDocStructure and specifically test for sDocStructure='MIME' to find mime-only discernment records
+					modified z_discernDocument to also specifically test for sDocStructure='EDI' to find edi-only discernment records
+					modified expeval to use ] as the leading character of a mime expression, supporting ]SENDER ]RECEIVER and ]SUBJECT as a regex expression
+	4/23/24 (CR)	modified transactionStart to start a transaction based on a workflow iid being in the WORKFLOW_NAME column
+	4/25/24 (CR)	modified z_discernDocumentLoop to use regular expressions when checking MIME documents, and combined strings for non-MIME documents
+					modified Framework_Core_getFile to change the reference of wm42a:25000 to u02awm41a:25000
+	4/29/24 (CR)	modified ifNull to make 'value' optional and not check for it unless 'string' is actually null
+					modified mimedocToEmailDoc to use ifNull to check for both Message-ID and Message-Id
+---fully deployed---
+	5/21/24 (GM)	removed validateToken call from fwcore &gt; uisupport &gt; Framework_Core_getFile
+					modified Framework_Core_listFiles to change the reference of wm42a:25000 to u02awm41a:25000
+	5/28/24 (GM)	removed validateToken call from fwcore &gt; uisupport &gt; Framework_Core_listFiles
+					removed validateToken call from fwcore &gt; uisupport &gt; Framework_Core_updateTrans
+	5/30/24 (GM)	changed input variable for httpl call in fwcore &gt; uisupport &gt; Framework_Core_updateTrans
+					modified Framework_Core_updateTrans to change the reference of wm42a:25000 to u02awm41a:25000
+	5/31/24 (CR)	added util.jtypeof:typeOf to allow parsing of odd emails by mimedocToEmaildoc
+					modified mimedocToEmaildoc to handle a new kind of email format
+---fully deployed---
+	6/18/24 (CR)	modified translateEOL to support a new component parameter ENCODING, which defaults to UTF-8 (GB2312 is simplified Chinese)
+	7/08/24 (GM)	added Framework_Core_getISLog to uisupport folder; this service returns the log file of a server, and it is invoked from ISMonitor and ISControl
+	7/12/24 (CR)	modified pgpEncrypt to support setting SIGNATURE_KEY=UNSIGNED for users who don't understand how to deal with signatures on encrypted documents
+	7/12/24 (GM)	added Framework_Core_getListenerInfo to uisupport folder; this service returns SAP listener info for a server, and it is invoked from ISControl on FusionUI
+	7/18/24 (CR)	fixed bug in padContent where EOL was not set to blank if OPT_EOL not specified
+---fully deployed---
+	7/25/24 (GM)	corrected timeout value in Framework_Core_shutdownIS to prevent 10 min wait before restart/shutdown
+	7/25/24 (GM)	added service fwcore &gt; uisupport &gt; Framework_Core_suspendSAPListeners
+	7/25/24 (GM)	added service fwcore &gt; uisupport &gt; Framework_Core_enableSAPListeners
+	7/25/24 (GM)	added service fwcore &gt; uisupport &gt; Framework_Core_startupIS
+	7/30/24 (CR)	modified pgpEncrypt to quote the recipient in cases where the supplied partner key has illegal characters in the key name
+	8/2/24 (CR)		added execv to support the above pgpEncrypt using individual command line arguments instead of just a single string command line
+---fully deployed---
+	8/12/24 (CR)	added new util.pdf:buildPdf service as well as the utilp.jpdf:stringToPdfBytearray
+	8/19/24 (CR)	added new service date.jconvert:date2UTC
+---fully deployed---
+	8/22/24 (GM)	added Columbus Modified Fiber (PROD7619CM) to fwcore &gt; uisupport &gt; getFile, listFiles, and updateTrans
+	8/28/24 (CR)	modified translateEOL to support OPT_ENCODING_IN and OPT_ENCODING_OUT  (see ARInvoicesFromAS400LasPalmasToSAP-IT-AR-I166 for an example)
+	8/29/24 (CR)	modified subDTx to support $DT7-1D$ for generating yesterday's date
+---fully deployed---
+	9/5/24 (CR)		modified expeval to support xpaths that have .substring(2,5) or similar type expressions at the end of them
+	9/30/24 (CR)	added new fwcore.client.email:email services (9 total services)
+					modified mimedocToEmaildoc to improve attachment support and support for encoded subjects
+	10/3/24 (CR)	modified expeval to support EDIFACT expressions, ie    {UNB0401:plus:colon:'\r\n    or    {PIA0200[LIN0100="30"]:plus:colon:'\r\n
+	10/4/24 (RB)	modified edi/X12/V401 204 schema.  change  the N1 segment under  the S5 segment to be multiple
+	10/7/24 (CR)	modified z_discernDocument to select EDIFACT discernment records when that document is detected
+	10/9/24 (CR)	modified z_buildLeaderFromContent to recognize both UNA/UNB EDIFACT documents
+	10/10/24 (DM)	modified edi/X12/V401 300 schema.  change  the DTM segment under  the LX segment to be multiple
+	10/11/24 (CR)	modified padContent to not pad the final record if the final record was blank
+---fully deployed---
+	10/21/24 (CR)	added a new service fixBadMimeData to be used before calling the createMimeData service
+	10/24/24 (PK)	modified docAliasSettings document to add AS2_CONTENT_DISPOSITION, AS2_DISP_NOTIF_OPTIONS, AS2_CERT_FILENAME, ENCODING fields for AS2 support
+       10/24/24 (PK)    modified getAliasSettings service to add AS2_CONTENT_DISPOSITION, AS2_DISP_NOTIF_OPTIONS, AS2_CERT_FILENAME, ENCODING fields for AS2 support
+	11/15/25 (GM)	added PROD7219CM to environment selection in getFile, listFiles, and updateTrans services ( in fwcore &gt; uisupport )
+	11/21/24 (CR)	modified mimedocToEmaildoc extensively, with better support for Message_ID, Date, Subject, attachments, esp pdf files
+	11/22/24 (CR)	modified getContent to call the fixBadMimeData when the caller wants a mimeDoc from the content; also removed some debug code
+	12/3/24 (CR)	modified both processLastError and traceLastError to extend the id of 00000000 to 000000%sDatetime%, so that unknown errors are logged to individual files
+---fully deployed---
+	12/6/24 (CR)	made a copy of schizoLog +log +traceLog under the new fwcore.flow folder structure, for better logging
+	12/9/24 (CR)	removed some debug code from executeWorkflow and moved it to the fwcore.engine folder
+	12/30/24 (CR)	removed copyRFTS
+	1/3/25 (CR)		removed docTpProfile
+					modified ExecWorkflow_s and ExecWorkflow_wretry to support the new flow:log service
+					added a new service z_flushTraceEntries
+					updated transactionCreate to use the new flow:log service and to flush out the trace log entries from the fw document
+	1/7/25 (CR)		updated docAliasSettings to add FTP HTTP DB SAP DLV_VAR_PROTOCOL AGFLD APFLD and remove OAUTH WS FILEGET FILEPUT EXTSETTINGS
+					updated the new getAliasSettings to accomodate the above docAliasSettings changes
+	1/9/25 (CR)		modified updateActiveDeliverySize to remove some debug logging
+					modified cdWithFail thru renameWithFailS services to use the new flow:log service
+---fully deployed---
+	1/16/25 (CR)	modified pgpEncrypt to use the new flow:log service
+					modified pgpDecrypt to use the new flow:log service and to use the execv to pass arguments as an array, the way pgpEncrypt does
+	1/17/25 (CR)	created a new fwcore.data.wf:z_getWorkflowByIID service that drops RFTS support and 
+						pointed GetFileSystem, GetFTP and GetSharepoint as well as some Core services to this new service
+					modified getMyStepParms to remove support for rfts and support the new z_getWorkflowByIID service
+					modified ExecWorkflow_s to add the sFwTracetransid parameter to the z_getWorkflowByIID call
+					modified transactionStart to add the sFwTracetransid parameter to the z_getWorkflowByIID call + use the new flow:log
+	1/28/25 (CR)	copied getWorkflowByIID to fwcore.data.wf:z_getWorkflowByIID_old and modified getWorkflowByIID to call it
+	1/29/25 (CR)	modified z_updateActiveWorkflow to remove rfts references
+					modified z_getActiveWorkflowStepInfo to remove rfts references
+					modified executeWorkflow to remove rfts references
+					modified transactionStart to remove rfts references
+	1/30/25 (CR)	modified z_buildLeaderFromContent to support flow:log
+					added a new service utilp.client.sftp.jscape:mkdir to create a folder
+					modified cdWithFail to support a leading + on the front of a folder to indicate the caller wants to create the folder first
+					modified cdWithFailS to support a leading + on the front of a folder to indicate the caller wants to create the folder first
+	1/31/25 (CR)	deleted the old and unused com.ipaper.wmframe.core.sftp.jscape folder
+					moved the cd service from com.ipaper.wmframe.core.utilp.client.ftp:cd to fwcore.utilp.client.ftp:cd
+	2/5/25 (CR)		modified both splitIFjson and splitIFjsonCount to support OPT_SPLIT_CONTENT and use the new flow:log service
+	2/6/25 (CR)		modified z_updateActiveWorkflow to drop some more stuff from the logging of the workflow + use the new flow:log
+					modified aliasSwitch to use the new flow:log
+	2/13/25 (KV)	modified registerErrorSNE to add new assignment groups (IT Payroll, HR &amp; Development) to the hardcoded list
+					modified B2BInfoReader to change hardcoded priorrun file from pipeline folder to csutil
+	2/20/25 (CR)	fixed flow:z_transLog where child transactions where being created
+---fully deployed---
+	3/6/25 (CR)		fixed an error message in getAliasSettings
+	4/10/25 (GM)	removed Riegelwood, Franklin, Georgetown, and Columbus Mod from fwcore &gt; uisupport &gt; getFile, listFiles, updateTrans services environment options
+	4/24/25 (CR)	modified com.ipaper.wmframe.core.data.wf:getWorkflowByIID to call the new non-rfts version of fwcore.data.wf:z_getWorkflowByIID
+	5/1/25 (CR)		modified getAliasSettings to return all FTP*,HTTP*,etc values
+					modified getAliasSettings/Trace to now point to the new fwcore:getAliasSettings (instead of getAliasSettings_old)
+					modified z_getFirstAvailableQUEDFORDELVTrans to increase the FOR UPDATE WAIT timeout from 60 to 120 seconds
+---fully deployed---
+	5/6/25 (CR)		modified the logging slightly in putWithFail services
+	6/27/25 (CR)	modified splitIFflat to support a single header record and multiple footer records in the content
+					updated subDTx to support 1 month ago using $DT7-1M$
+	06/30/25 (KV)	modified registerErrorSNE to read file based groups and file based SNurl(API) . This will accomodate nonFW boxes to continue using this service to create tickets.
+---fully deployed---
+	7/17/25 (CR)	modified splitIF to support OPT_HEADERFOOTER=false for some types of flat files that have record markers at the start of each record
+	7/30/25 (CR)	fixed utilp:subSYSv to properly do $FOLDER$ and $FNAME$ substitution
+---fully deployed---
+	8/28/25 (CR)	cosmetic change to updateActiveSenderReceiverAlias so that it logs a little better
+					modified updateActiveDocAttributes to simply log a message when no values are supplied, rather than failing
+	9/10/25 (KV)	modified registerErrorSNE, added logic to differentiate between IP and GCF site and create tickets accordingly.
+---fully deployed---
+	9/12/25 (KV)	fixed improper use of schizoLog in registerErrorSNE
+	9/12/25 (GM)	modified Framework_Core_updateTrans to include restarting on STEP00, and deleting W-, transactions from FusionUI Home table
+---fully deployed---
+	1/14/26 (CR)	modified getFirstAvailableQUEDFORDELVTrans to handle the special case of concurrency=1
+					modified publishFwEnvelope to use a random number for the routing to a mapping group, rather than the transaction id
+---fully deployed---
+      2/27/26 (KV)   modified B2BParse1Message to stop converting tickets to Krakow support post US business time.
+</value>
+  <value name="stateless">yes</value>
+  <value name="caching">no</value>
+  <value name="prefetch">no</value>
+  <value name="cache_ttl">15</value>
+  <value name="prefetch_level">1</value>
+  <value name="audit_level">off</value>
+  <value name="check_internal_acls">no</value>
+  <value name="icontext_policy">$null</value>
+  <value name="system_service">no</value>
+  <value name="retry_max">0</value>
+  <value name="retry_interval">0</value>
+  <value name="svc_in_validator_options">none</value>
+  <value name="svc_out_validator_options">none</value>
+  <value name="auditoption">0</value>
+  <null name="auditfields_input"/>
+  <null name="auditfields_output"/>
+  <record name="auditsettings" javaclass="com.wm.util.Values">
+    <value name="document_data">0</value>
+    <value name="startExecution">false</value>
+    <value name="stopExecution">false</value>
+    <value name="onError">true</value>
+  </record>
+  <record name="circuitbreakersettings" javaclass="com.wm.util.Values">
+    <value name="enabled">false</value>
+    <value name="failureEvent">1</value>
+    <value name="timeoutPeriod">60</value>
+    <value name="failureThreshold">5</value>
+    <value name="failurePeriod">60</value>
+    <value name="openAction">1</value>
+    <null name="serviceToInvoke"/>
+    <value name="resetPeriod">300</value>
+    <value name="cancelThreadOnTimeout">false</value>
+  </record>
+  <record name="concurrentrequestlimitsettings" javaclass="com.wm.util.Values">
+    <value name="maxConcurrentRequests">20</value>
+    <value name="concurrentRequestLimitEnabled">false</value>
+  </record>
+  <array name="allowedHTTPMethods" type="value" depth="1">
+    <value>HEAD</value>
+    <value>DELETE</value>
+    <value>POST</value>
+    <value>GET</value>
+    <value>OPTIONS</value>
+    <value>PUT</value>
+    <value>PATCH</value>
+  </array>
+  <value name="pipeline_option">1</value>
+  <null name="originURI"/>
+  <value name="modifiable">true</value>
+  <value name="is_public">false</value>
+</Values>

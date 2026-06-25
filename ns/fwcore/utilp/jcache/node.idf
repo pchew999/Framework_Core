@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">fwcore.utilp.jcache</value>
+  <value name="is_public">false</value>
+  <value name="shared">CnByaXZhdGUgc3RhdGljIGNsYXNzIE15V2lsZENhcmRGaWx0ZXIgaW1wbGVtZW50cyBGaWxlbmFt
+ZUZpbHRlcnsKICBwcml2YXRlIFN0cmluZyBzUmVnRXg7CiAgcHJpdmF0ZSBQYXR0ZXJuIHpQYXR0
+ZXJuOwoKICBwdWJsaWMgTXlXaWxkQ2FyZEZpbHRlcihTdHJpbmcgaXNXaWxkY2FyZCkgeyAgLy8g
+YWNjZXB0ICogb3IgPyBhcyBhIHdpbGRjYXJkIGNoYXJhY3RlciBpbiB0aGUgZmlsZW5hbWUKCXNS
+ZWdFeCA9IGlzV2lsZGNhcmQucmVwbGFjZSgiXiIsICJcXF4iKTsJLy8gZmlyc3QsIHJlcGxhY2Ug
+YW55IF4gY2FyYXRzIHdpdGggYSBcXiB3aGVyZSB0aGUgXCBuZWVkcyB0byBiZSBlc2NhcGVkCglz
+UmVnRXggPSBpc1dpbGRjYXJkLnJlcGxhY2UoIi4iLCAiXFwuIik7CS8vIHRoZW4sIHJlcGxhY2Ug
+YW55IC4gcGVyaW9kcyB3aXRoIGEgXC4gd2hlcmUgdGhlIFwgbmVlZHMgdG8gYmUgZXNjYXBlZAoJ
+c1JlZ0V4ID0gaXNXaWxkY2FyZC5yZXBsYWNlKCIkIiwgIlxcJCIpOwkvLyB0aGVuLCByZXBsYWNl
+IGFueSAkIGRvbGxhciBzaWducyB3aXRoIGEgXCQgd2hlcmUgdGhlIFwgbmVlZHMgdG8gYmUgZXNj
+YXBlZAoJc1JlZ0V4ID0gc1JlZ0V4LnJlcGxhY2UoIioiLCAiLioiKTsJCQkvLyB0aGVuLCByZXBs
+YWNlIGFueSAqIGFzdGVyaXNrcyB3aXRoIHRoZSByZWd1bGFyIGV4cHJlc3Npb24gLioKCXNSZWdF
+eCA9IHNSZWdFeC5yZXBsYWNlKCI/IiwgICIuIik7CQkJLy8gdGhlbiwgcmVwbGFjZSBhbnkgPyBx
+dWVzdGlvbiBtYXJrcyB3aXRoIHRoZSByZWd1bGFyIGV4cHJlc3Npb24gLgoJc1JlZ0V4ID0gIl4i
+ICsgc1JlZ0V4ICsgIiQiOwkJCQkvLyB0aGVuIHN1cnJvdW5kIHRoZSByZXN1bHQgd2l0aCBzdGFy
+dC1vZi1zdHJpbmcgYW5kIGVuZC1vZi1zdHJpbmcgY2hhcmFjdGVycwoJc1JlZ0V4ID0gc1JlZ0V4
+LnRvTG93ZXJDYXNlKCk7CQkJCS8vIGxvd2VyY2FzZSB0aGUgd2hvbGUgdGhpbmcKICAgIHpQYXR0
+ZXJuID0gUGF0dGVybi5jb21waWxlKHNSZWdFeCk7CiAgfQoKICBwdWJsaWMgYm9vbGVhbiBhY2Nl
+cHQoRmlsZSBkaXIsIFN0cmluZyBzRmlsZW5hbWUpewogICAgcmV0dXJuIHpQYXR0ZXJuLm1hdGNo
+ZXIoc0ZpbGVuYW1lLnRvTG93ZXJDYXNlKCkpLmZpbmQoKTsKICB9Cn0KCQ==</value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.io.*</value>
+    <value>java.lang.SecurityException</value>
+    <value>java.net.InetAddress</value>
+    <value>java.util.Properties</value>
+    <value>com.wm.lang.ns.*</value>
+    <value>com.wm.app.b2b.server.*</value>
+    <value>java.io.FilenameFilter</value>
+    <value>java.util.regex.Pattern</value>
+  </array>
+</Values>

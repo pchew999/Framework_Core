@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">getCurrentPackage</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">U3RyaW5nIHNQYWNrYWdlTmFtZSA9ICJ1bmtub3duIjsNCg0KTlNTZXJ2aWNlIGNhbGxpbmdTZXJ2
+aWNlTmFtZSA9IFNlcnZpY2UuZ2V0Q2FsbGluZ1NlcnZpY2UoKTsNCi8vTlNOYW1lIHNlcnZpY2VO
+U05vZGUgPSBjYWxsaW5nU2VydmljZU5hbWUuZ2V0TlNOYW1lKCk7DQovL1N0cmluZyBzZXJ2aWNl
+TmFtZSA9IHNlcnZpY2VOU05vZGUuZ2V0RnVsbE5hbWUoKTsNCk5TUGFja2FnZSBuc05vZGVQYWNr
+YWdlTmFtZSA9IGNhbGxpbmdTZXJ2aWNlTmFtZS5nZXRQYWNrYWdlKCk7DQpzUGFja2FnZU5hbWUg
+PSBuc05vZGVQYWNrYWdlTmFtZS5nZXROYW1lKCk7DQoNCklEYXRhQ3Vyc29yIGlDdXJzb3IgPSBw
+aXBlbGluZS5nZXRDdXJzb3IoKTsNCi8vSURhdGFVdGlsLnB1dChpQ3Vyc29yLCAic2VydmljZU5h
+bWUiLCBzZXJ2aWNlTmFtZSk7DQpJRGF0YVV0aWwucHV0KGlDdXJzb3IsICJwYWNrYWdlTmFtZSIs
+IHNQYWNrYWdlTmFtZSk7DQppQ3Vyc29yLmRlc3Ryb3koKTs=</value>
+</Values>

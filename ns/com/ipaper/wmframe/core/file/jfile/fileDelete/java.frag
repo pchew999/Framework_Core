@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">fileDelete</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">SURhdGFDdXJzb3IgY3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQoNCi8vIGZpbGVEZWxl
+dGUgLSBkZWxldGUgYSBmaWxlDQovLw0KLy8JCWZpbGVuYW1lIChpbnB1dCxyZXEpIC0gZnVsbHkt
+cXVhbGlmaWVkIHNvdXJjZSBwYXRoIGFuZCBuYW1lIG9mIGZpbGUNCi8vDQovLwkJc3RhdHVzIChv
+dXRwdXQsc3RyaW5nKSAtIHRydWUgaWYgdGhlIGRlbGV0ZSBzdWNjZWVkZWQNCi8vCQkJCQkJCQkg
+ZmFsc2UgaWYgdGhlIGRlbGV0ZSBmYWlsZWQNCg0KU3RyaW5nIHNGaWxlbmFtZSA9IG51bGw7CS8v
+aW5wdXQNCg0KaWYgKGN1cnNvci5maXJzdCgiZmlsZW5hbWUiKSkgc0ZpbGVuYW1lID0gKFN0cmlu
+ZykgY3Vyc29yLmdldFZhbHVlKCk7DQppZiAoc0ZpbGVuYW1lID09IG51bGwpIHRocm93IG5ldyBT
+ZXJ2aWNlRXhjZXB0aW9uKCJmaWxlRGVsZXRlOiBNaXNzaW5nIGlucHV0ICdmaWxlbmFtZSciKTsN
+Cg0KRmlsZSBvRmlsZSA9IG5ldyBGaWxlKHNGaWxlbmFtZSk7DQpib29sZWFuIHN0YXR1cyA9IG9G
+aWxlLmRlbGV0ZSgpOw0KSURhdGFVdGlsLnB1dCggY3Vyc29yLCAic3RhdHVzIiwgIiIgKyBzdGF0
+dXMpOw0KDQpjdXJzb3IuZGVzdHJveSgpOw==</value>
+</Values>

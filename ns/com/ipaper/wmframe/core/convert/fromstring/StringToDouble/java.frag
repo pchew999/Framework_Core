@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">StringToDouble</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">SURhdGFDdXJzb3IgY3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQoNCi8vIFN0cmluZ1Rv
+RG91YmxlIC0gY29udmVydCBhIHN0cmluZyB0byBhIDY0IGJpdCBEb3VibGUNCi8vDQovLwkJaW5w
+dXQgKGlucHV0LHJlcSkgLSBzdHJpbmcgZG91YmxlDQovLwkJb3V0cHV0IChvdXRwdXQsZG91Ymxl
+KSAtIGRvdWJsZQ0KRG91YmxlIGZPdXRwdXQgPSBudWxsOw0KU3RyaW5nIHNJbnB1dCA9IG51bGw7
+DQppZiAoY3Vyc29yLmZpcnN0KCJpbnB1dCIpKSBzSW5wdXQgPSAoU3RyaW5nKSBjdXJzb3IuZ2V0
+VmFsdWUoKTsNCmlmIChzSW5wdXQgPT0gbnVsbCkgdGhyb3cgbmV3IFNlcnZpY2VFeGNlcHRpb24o
+IlN0cmluZ1RvRG91YmxlOiBNaXNzaW5nIGlucHV0ICdpbnB1dCciKTsNCg0KZk91dHB1dCA9IERv
+dWJsZS52YWx1ZU9mKHNJbnB1dCk7DQpJRGF0YVV0aWwucHV0KGN1cnNvciwgIm91dHB1dCIsIGZP
+dXRwdXQgKTsNCmN1cnNvci5kZXN0cm95KCk7</value>
+</Values>

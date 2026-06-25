@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">fwcore.utilp.client.imap</value>
+  <value name="is_public">false</value>
+  <value name="shared">c3RhdGljIHB1YmxpYyBTdHJpbmcgdXBkYXRlU3ViamVjdChTdHJpbmcgbmV3U3ViamVjdCxNZXNz
+YWdlIG1zZykgdGhyb3dzIE1lc3NhZ2luZ0V4Y2VwdGlvbgp7CQoJaWYgKG5ld1N1YmplY3QuaW5k
+ZXhPZigidXNlX3N1YiIpICE9IC0xKQoJICB7CgkJU3RyaW5nIG9sZFN1YmplY3Q9bXNnLmdldFN1
+YmplY3QoKTsKCQlpZiAob2xkU3ViamVjdCAhPSBudWxsKQoJCQluZXdTdWJqZWN0ID0gbmV3U3Vi
+amVjdC5yZXBsYWNlKCJ1c2Vfc3ViIixvbGRTdWJqZWN0KTsKCQllbHNlIAoJCQluZXdTdWJqZWN0
+ID0gbmV3U3ViamVjdC5yZXBsYWNlKCJ1c2Vfc3ViIiwiIik7CQkKCSAgfQoJCglpZiAobmV3U3Vi
+amVjdC5pbmRleE9mKCJ1c2VfZnJvbSIpICE9IC0xKQoJICB7CgkJU3RyaW5nIGFkZHJUbXA9bXNn
+LmdldEZyb20oKVswXS50b1N0cmluZygpOwoJCWlmIChhZGRyVG1wICE9IG51bGwpCgkJCW5ld1N1
+YmplY3QgPSBuZXdTdWJqZWN0LnJlcGxhY2UoInVzZV9mcm9tIixhZGRyVG1wKTsKCQllbHNlIAoJ
+CQluZXdTdWJqZWN0ID0gbmV3U3ViamVjdC5yZXBsYWNlKCJ1c2VfZnJvbSIsIm4vYSIpOwkJCgkg
+IH0KCQkKCXJldHVybiBuZXdTdWJqZWN0Owp9CgpzdGF0aWMgcHVibGljIFN0cmluZyBjcmVhdGVB
+ZGRyZXNzU3RyaW5nKFN0cmluZyBhZGRyLCBNZXNzYWdlIG1zZykgdGhyb3dzIE1lc3NhZ2luZ0V4
+Y2VwdGlvbgp7CgkgQWRkcmVzc1tdIGE7CgkgaWYgKGFkZHIuaW5kZXhPZigidXNlX2Zyb20iKSE9
+IC0xKQoJIHsKCQkgU3RyaW5nIGFkZHJUbXA9ICIiOwoJCSBpZiAoKGEgPSBtc2cuZ2V0RnJvbSgp
+KSAhPSBudWxsKSB7CSAgICAJCQoJICAgIAkgICAgZm9yIChpbnQgaiA9IDA7IGogPCBhLmxlbmd0
+aDsgaisrKQoJICAgIAkgICAgCWFkZHJUbXA9YWRkclRtcCArIGFbal0udG9TdHJpbmcoKSsiLCAi
+OwkgICAgCSAgICAKCSAgICAJfQoJCSBhZGRyPWFkZHIucmVwbGFjZSgidXNlX2Zyb20iLGFkZHJU
+bXApOwoJIH0KCSAKCSBpZiAoYWRkci5pbmRleE9mKCJ1c2VfcmVwbHl0byIpIT0gLTEpCgkgewoJ
+CSBTdHJpbmcgYWRkclRtcD0gIiI7CgkJIGlmICgoYSA9IG1zZy5nZXRSZXBseVRvKCkpICE9IG51
+bGwpIHsJICAgIAkJCgkgICAgCSAgICBmb3IgKGludCBqID0gMDsgaiA8IGEubGVuZ3RoOyBqKysp
+CgkgICAgCSAgICAJYWRkclRtcD1hZGRyVG1wICsgYVtqXS50b1N0cmluZygpKyIsICI7CSAgICAJ
+ICAgIAoJICAgIAl9CgkJIGFkZHI9YWRkci5yZXBsYWNlKCJ1c2VfcmVwbHl0byIsYWRkclRtcCk7
+CgkgfQoJIAoJIGlmIChhZGRyLmluZGV4T2YoInVzZV90byIpIT0gLTEpCgkgewoJCSBTdHJpbmcg
+YWRkclRtcD0gIiI7CgkJIGlmICgoYSA9IG1zZy5nZXRSZWNpcGllbnRzKE1lc3NhZ2UuUmVjaXBp
+ZW50VHlwZS5UTykpICE9IG51bGwpIHsJICAgIAkJCgkgICAgCSAgICBmb3IgKGludCBqID0gMDsg
+aiA8IGEubGVuZ3RoOyBqKyspCgkgICAgCSAgICAJYWRkclRtcD1hZGRyVG1wICsgYVtqXS50b1N0
+cmluZygpKyIsICI7CSAgICAJICAgIAoJICAgIAl9CgkJIGFkZHI9YWRkci5yZXBsYWNlKCJ1c2Vf
+dG8iLGFkZHJUbXApOwoJIH0KCSAKCSBpZiAoYWRkci5pbmRleE9mKCJ1c2VfY2MiKSE9IC0xKQoJ
+IHsKCQkgU3RyaW5nIGFkZHJUbXA9ICIiOwoJCSBpZiAoKGEgPSBtc2cuZ2V0UmVjaXBpZW50cyhN
+ZXNzYWdlLlJlY2lwaWVudFR5cGUuQ0MpKSAhPSBudWxsKSB7CSAgICAJCQoJICAgIAkgICAgZm9y
+IChpbnQgaiA9IDA7IGogPCBhLmxlbmd0aDsgaisrKQoJICAgIAkgICAgCWFkZHJUbXA9YWRkclRt
+cCArIGFbal0udG9TdHJpbmcoKSsiLCAiOwkgICAgCSAgICAKCSAgICAJfQoJCSBhZGRyPWFkZHIu
+cmVwbGFjZSgidXNlX2NjIixhZGRyVG1wKTsKCQkgfQoJCQkgCgkJcmV0dXJuIGFkZHI7CQoJfQoJ
+</value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>com.wm.lang.xml.XmlUtil</value>
+    <value>com.wm.util.coder.IDataXMLCoder</value>
+    <value>java.io.*</value>
+    <value>java.util.Properties</value>
+    <value>java.util.concurrent.TimeUnit</value>
+    <value>java.util.Enumeration</value>
+    <value>javax.mail.*</value>
+    <value>javax.mail.internet.AddressException</value>
+    <value>javax.mail.internet.InternetAddress</value>
+    <value>javax.mail.internet.MimeBodyPart</value>
+    <value>javax.mail.internet.MimeMessage</value>
+    <value>javax.mail.internet.MimeMultipart</value>
+    <value>javax.mail.internet.MimeUtility</value>
+    <value>javax.mail.search.FlagTerm</value>
+    <value>javax.mail.search.SearchTerm</value>
+    <value>javax.mail.search.MessageIDTerm</value>
+    <value>java.text.SimpleDateFormat</value>
+    <value>java.util.Date</value>
+    <value>com.ibm.icu.text.DateFormat</value>
+    <value>com.sun.mail.imap.IMAPFolder</value>
+  </array>
+</Values>

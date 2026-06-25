@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">readPipeline</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">SURhdGFDdXJzb3IgY3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQoNCi8vIHJlYWRQaXBl
+bGluZSAtIHJlYWQgdGhlIHBpcGVsaW5lIGludG8gaXRzIG93biBkb2N1bWVudA0KLy8NCi8vCQlw
+aXBlbGluZSAob3V0cHV0LGRvY3VtZW50KSAtIHRoZSBjb250ZW50cyBvZiB0aGUgcGlwZWxpbmUN
+Cg0KSURhdGEgcGlwZWxpbmVEYXRhID0gSURhdGFGYWN0b3J5LmNyZWF0ZSgpOw0KSURhdGFDdXJz
+b3IgcGlwZWxpbmVEYXRhQ3Vyc29yID0gcGlwZWxpbmVEYXRhLmdldEN1cnNvcigpOw0KDQpjdXJz
+b3IuZmlyc3QoKTsNCmRvIHsNCglJRGF0YVV0aWwucHV0KHBpcGVsaW5lRGF0YUN1cnNvcixjdXJz
+b3IuZ2V0S2V5KCksIGN1cnNvci5nZXRWYWx1ZSgpKTsNCglwaXBlbGluZURhdGFDdXJzb3IubmV4
+dCgpOw0KfSB3aGlsZSAoY3Vyc29yLm5leHQoKSk7DQoNCnBpcGVsaW5lRGF0YUN1cnNvci5kZXN0
+cm95KCk7DQoNCklEYXRhVXRpbC5wdXQoY3Vyc29yLCJwaXBlbGluZSIscGlwZWxpbmVEYXRhKTsN
+Cg0KY3Vyc29yLmRlc3Ryb3koKTs=</value>
+</Values>
