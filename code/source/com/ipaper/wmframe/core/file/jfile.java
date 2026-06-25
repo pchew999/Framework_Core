@@ -577,7 +577,7 @@ public final class jfile
 			long pos2 = fos.getChannel().position();					//get the file position after writing the string
 			IDataUtil.put(cursor, "byteswritten", "" + (pos2 - pos1));	//return the actual number of bytes written
 		} catch (IOException ioe) {
-			throw new ServiceException(ioe);
+			throw new ServiceException(ioe.toString() + "[DEBUG] stream type = " + oStream.getClass().getName());
 		}
 		
 		cursor.destroy();
