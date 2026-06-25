@@ -566,6 +566,8 @@ public final class jfile
 		if (sString == null) throw new ServiceException("streamWriteString: Missing input 'string'");
 		
 		try {
+			System.out.println("[DEBUG] stream type = " + oStream.getClass().getName());
+			System.out.println("[DEBUG] stream sSring = " + sString);
 			FileOutputStream fos = (FileOutputStream) oStream;
 			long pos1 = fos.getChannel().position();					//get the file position before writing the string
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
